@@ -28,7 +28,7 @@ Route::resource('languages', 'LanguageController');
 
 Route::resource('travelers', 'TravelerController');
 
-Route::resource('gENDERS', 'GENDERController');
+Route::resource('genders', 'GenderController');
 
 Route::resource('cities', 'CityController');
 
