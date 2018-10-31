@@ -18,6 +18,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::match(['get', 'post'], 'register', function(){
+    return redirect('/');
+});
+
 Route::get('/home', 'HomeController@index');
 
 Route::resource('countries', 'CountryController');

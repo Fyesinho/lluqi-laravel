@@ -1,16 +1,13 @@
 @foreach ((array) session('flash_notification') as $message)
-    @if ($message['overlay'])
+    @if (isset($message['overlay']) && $message['overlay'])
         @include('flash::modal', [
             'modalClass' => 'flash-modal',
             'title'      => $message['title'],
             'body'       => $message['message']
         ])
     @else
-        <div class="alert
-                    alert-{{ $message['level'] }}
-                    {{ $message['important'] ? 'alert-important' : '' }}"
-        >
-            @if ($message['important'])
+        <div class="alert alert-{{ isset($message['level']) ? $message['level'] : '' }} {{ isset($message['important']) ? $message['important'] : '' ? 'alert-important' : '' }}">
+            @if (isset($message['important']))
                 <button type="button"
                         class="close"
                         data-dismiss="alert"
@@ -18,7 +15,7 @@
                 >&times;</button>
             @endif
 
-            {!! $message['message'] !!}
+            {!! isset($message['message']) ? $message['message'] : '' !!}
         </div>
     @endif
 @endforeach

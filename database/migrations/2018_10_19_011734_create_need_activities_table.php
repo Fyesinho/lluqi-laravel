@@ -15,6 +15,7 @@ class CreateNeedActivitiesTable extends Migration
     {
         Schema::create('need_activities', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('avatar');
             $table->text('activity');
             $table->timestamps();
             $table->softDeletes();
