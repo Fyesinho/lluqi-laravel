@@ -25,6 +25,6 @@ class UpdateTravelerRequest extends FormRequest
      */
     public function rules()
     {
-        return Traveler::$rules;
+        return [];
     }
 }

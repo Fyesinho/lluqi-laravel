@@ -23,8 +23,9 @@ class CreateTravelerRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
-        return Traveler::$rules;
+    public function rules(){
+        return [
+
+        ];
     }
 }

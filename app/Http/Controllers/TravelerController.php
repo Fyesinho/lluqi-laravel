@@ -4,24 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTravelerRequest;
 use App\Http\Requests\UpdateTravelerRequest;
+use App\Models\City;
 use App\Models\Country;
+use App\Models\Gender;
 use App\Models\Language;
 use App\Repositories\TravelerRepository;
-use App\Http\Controllers\AppBaseController;
+use App\User;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
-class TravelerController extends AppBaseController
+class TravelerController extends Controller
 {
-    /** @var  TravelerRepository */
-    private $travelerRepository;
-
-    public function __construct(TravelerRepository $travelerRepo)
-    {
-        $this->travelerRepository = $travelerRepo;
-    }
 
     /**
      * Display a listing of the Traveler.
@@ -29,10 +24,9 @@ class TravelerController extends AppBaseController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $this->travelerRepository->pushCriteria(new RequestCriteria($request));
-        $travelers = $this->travelerRepository->all();
+        $travelers = User::traveler()->get();
 
         return view('travelers.index')
             ->with('travelers', $travelers);
@@ -47,8 +41,10 @@ class TravelerController extends AppBaseController
     {
         $countries = Country::pluck('name', 'id');
         $languages = Language::pluck('title', 'id');
+        $cities = City::pluck('city', 'id');
+        $genders = Gender::pluck('name','id');
 
-        return view('travelers.create', compact('countries', 'languages'));
+        return view('travelers.create', compact('countries', 'languages', 'cities', 'genders'));
     }
 
     /**
@@ -61,8 +57,8 @@ class TravelerController extends AppBaseController
     public function store(CreateTravelerRequest $request)
     {
         $input = $request->all();
-        var_dump($input);
-        $traveler = $this->travelerRepository->create($input);
+        $input['role'] = User::ROLE_TRAVELER;
+        $traveler = User::create($input);
 
         Flash::success('Traveler saved successfully.');
 
@@ -78,7 +74,7 @@ class TravelerController extends AppBaseController
      */
     public function show($id)
     {
-        $traveler = $this->travelerRepository->findWithoutFail($id);
+        $traveler = User::findOrFail($id);
 
         if (empty($traveler)) {
             Flash::error('Traveler not found');
@@ -98,7 +94,7 @@ class TravelerController extends AppBaseController
      */
     public function edit($id)
     {
-        $traveler = $this->travelerRepository->findWithoutFail($id);
+        $traveler = User::findOrFail($id);
 
         if (empty($traveler)) {
             Flash::error('Traveler not found');
@@ -106,7 +102,12 @@ class TravelerController extends AppBaseController
             return redirect(route('travelers.index'));
         }
 
-        return view('travelers.edit')->with('traveler', $traveler);
+        $countries = Country::pluck('name', 'id');
+        $languages = Language::pluck('title', 'id');
+        $cities = City::pluck('city', 'id');
+        $genders = Gender::pluck('name','id');
+
+        return view('travelers.edit', compact('traveler', 'countries', 'languages', 'cities', 'genders'));
     }
 
     /**
@@ -119,7 +120,7 @@ class TravelerController extends AppBaseController
      */
     public function update($id, UpdateTravelerRequest $request)
     {
-        $traveler = $this->travelerRepository->findWithoutFail($id);
+        $traveler = User::findOrFail($id);
 
         if (empty($traveler)) {
             Flash::error('Traveler not found');
@@ -127,7 +128,7 @@ class TravelerController extends AppBaseController
             return redirect(route('travelers.index'));
         }
 
-        $traveler = $this->travelerRepository->update($request->all(), $id);
+        $traveler = $traveler->update($request->all());
 
         Flash::success('Traveler updated successfully.');
 

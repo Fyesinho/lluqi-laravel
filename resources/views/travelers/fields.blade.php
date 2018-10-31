@@ -1,37 +1,37 @@
 <!-- Email Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('email', 'Email:') !!}
-    {!! Form::email('email', null, ['class' => 'form-control']) !!}
+    {!! Form::email('email', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('name', 'Name:') !!}
-    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+    {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Gender Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('gender', 'Gender:') !!}
-    {!! Form::text('gender', null, ['class' => 'form-control']) !!}
+    {!! Form::select('gender_id', $genders, null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Birthday Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('birthday', 'Birthday:') !!}
-    {!! Form::number('birthday', null, ['class' => 'form-control']) !!}
+    {!! Form::date('birthday', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Password Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('password', 'Password:') !!}
-    {!! Form::text('password', null, ['class' => 'form-control']) !!}
+    {!! Form::text('password', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Phone Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('phone', 'Phone:') !!}
-    {!! Form::number('phone', null, ['class' => 'form-control']) !!}
+    {!! Form::number('phone', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Country Id Field -->
@@ -43,7 +43,7 @@
 <!-- City Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('city', 'City:') !!}
-    {!! Form::text('city', null, ['class' => 'form-control']) !!}
+    {!! Form::select('city_id', $cities, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Language Id Field -->
