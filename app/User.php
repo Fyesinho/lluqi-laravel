@@ -21,13 +21,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'gender_id', 'birthday', 'phone', 'role', 'gender_id', 'country_id', 'city_id',
         'language_id', 'language_id', 'language2_id', 'language3_id', 'language4_id',
-        'facebook', 'vimeo'
+        'facebook', 'vimeo', 'payment_at'
     ];
-
-    protected $casts = [
-        'payment_at' => 'datetime'
-    ];
-
 
     /**
      * The attributes that should be hidden for arrays.

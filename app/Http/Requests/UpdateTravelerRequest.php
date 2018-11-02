@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Traveler;
 
@@ -24,7 +25,7 @@ class UpdateTravelerRequest extends FormRequest
      * @return array
      */
     public function rules(){
-        $user = ($this->user) ? $this->user : $this;
+        $user = User::whereEmail($this['email'])->first();
         return [
             'name'      => 'required',
             'email'     => 'required|email|unique:users,email,' . $user->id,

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\API;
 
 use App\Models\Traveler;
+use App\User;
 use InfyOm\Generator\Request\APIRequest;
 
 class UpdateTravelerAPIRequest extends APIRequest
@@ -23,7 +24,7 @@ class UpdateTravelerAPIRequest extends APIRequest
      * @return array
      */
     public function rules(){
-        $user = ($this->user) ? $this->user : $this;
+        $user = User::whereEmail($this['email'])->first();
         return [
             'name'      => 'required',
             'email'     => 'required|email|unique:users,email,' . $user->id,

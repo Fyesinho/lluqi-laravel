@@ -70,6 +70,24 @@
     {!! Form::select('language4_id', $languages, null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- facebook Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('facebook', 'Facebook:') !!}
+    {!! Form::text('facebook', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- facebook Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('vimeo', 'Vimeo:') !!}
+    {!! Form::text('vimeo', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- fecha de compra Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('payment_at', 'Fecha de compra:') !!}
+    {!! Form::date('payment_at', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
