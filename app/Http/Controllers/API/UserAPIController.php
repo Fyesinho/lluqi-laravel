@@ -53,4 +53,18 @@ class UserAPIController extends Controller{
         }
     }
 
+    public function update(Request $request){
+        $user = Auth::guard('api')->user();
+        $data = $request->all();
+
+        if(empty($data['password'])){
+            unset($data['password']);
+        }else {
+            $data['password'] = bcrypt($data['password']);
+        }
+
+        $user->update($data);
+        return response()->json([$user], 200);
+    }
+
 }

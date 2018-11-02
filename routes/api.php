@@ -19,6 +19,7 @@ Route::post('logout', 'UserApiController@logout');
 
 
 //Route::group(['middleware' => 'auth:api'], function(){
+    Route::patch('user', 'UserAPIController@update');
 
     Route::resource('pruebas', 'PruebaAPIController');
     Route::resource('languages', 'LanguageAPIController');
