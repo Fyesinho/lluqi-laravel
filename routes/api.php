@@ -18,7 +18,7 @@ Route::post('register', 'UserApiController@register');
 Route::post('logout', 'UserApiController@logout');
 
 
-Route::group(['middleware' => 'auth:api'], function(){
+//Route::group(['middleware' => 'auth:api'], function(){
 
     Route::resource('pruebas', 'PruebaAPIController');
     Route::resource('languages', 'LanguageAPIController');
@@ -27,7 +27,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::resource('cities', 'CityAPIController');
     Route::resource('need_activities', 'NeedActivityAPIController');
     Route::resource('offers', 'OfferAPIController');
-    Route::resource('hostels', 'HostelAPIController');
     Route::resource('hostels', 'HostelAPIController');
     Route::resource('genders', 'GenderAPIController');
     Route::resource('hostels', 'HostelAPIController');
@@ -38,4 +37,4 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::resource('hostel_months', 'HostelMonthAPIController');
     Route::resource('genders', 'GenderAPIController');
 
-});
+//});
