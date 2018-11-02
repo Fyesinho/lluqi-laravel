@@ -26,7 +26,7 @@ class CreateUserAPIRequest extends FormRequest
     return [
         'name'      => 'required',
         'email'     => 'required|email|unique:users,email',
-        'gender'    => 'required',
+        'gender_id' => 'required',
         'birthday'  => 'required',
         'phone'     => 'required',
         'password'  => 'required',
@@ -41,7 +41,7 @@ class CreateUserAPIRequest extends FormRequest
             'email.email'       => 'El campo email no corresponde a un email valido',
             'email.unique'      => 'Email ya existente',
 
-            'gender.required'   => 'Campo genero es requerido',
+            'gender_id.required'=> 'Campo genero es requerido',
             'birthday.required' => 'Campo fecha de nacimiento es requerido',
             'phone.required'    => 'Campo telefono es requerido',
             'password.required' => 'Campo password es requerido'
