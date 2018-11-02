@@ -20,6 +20,8 @@ class UserAPIController extends Controller{
             'phone'     => request()->get('phone'),
             'password'  => bcrypt(request()->get('password')),
         ];
+        $data['role'] = User::ROLE_TRAVELER;
+
         $user = User::create($data);
         return response()->json([$user], 200);
     }

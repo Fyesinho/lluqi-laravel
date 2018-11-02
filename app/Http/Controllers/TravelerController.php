@@ -60,9 +60,15 @@ class TravelerController extends Controller
     {
         $input = $request->all();
         $input['role'] = User::ROLE_TRAVELER;
-        $traveler = User::create($input);
 
-        //$traveler->needActivities()->sync(request()->get('basic_help', []));
+        $basic_help = request()->get('basic_help', []);
+        $advanced_help = request()->get('advanced_help', []);
+        unset($input['basic_help']);
+        unset($input['advanced_help']);
+
+        $traveler = User::create($input);
+        $traveler->userBasicHelp()->sync($basic_help);
+        $traveler->userAdvancedHelp()->sync($advanced_help);
 
         Flash::success('Traveler saved successfully.');
         return redirect(route('travelers.index'));
