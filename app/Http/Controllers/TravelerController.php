@@ -8,6 +8,7 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Gender;
 use App\Models\Language;
+use App\Models\NeedActivity;
 use App\Repositories\TravelerRepository;
 use App\User;
 use Illuminate\Http\Request;
@@ -43,8 +44,9 @@ class TravelerController extends Controller
         $languages = Language::pluck('title', 'id');
         $cities = City::pluck('city', 'id');
         $genders = Gender::pluck('name','id');
+        $activities = NeedActivity::pluck('activity', 'id');
 
-        return view('travelers.create', compact('countries', 'languages', 'cities', 'genders'));
+        return view('travelers.create', compact('countries', 'languages', 'cities', 'genders', 'activities'));
     }
 
     /**
@@ -60,8 +62,9 @@ class TravelerController extends Controller
         $input['role'] = User::ROLE_TRAVELER;
         $traveler = User::create($input);
 
-        Flash::success('Traveler saved successfully.');
+        //$traveler->needActivities()->sync(request()->get('basic_help', []));
 
+        Flash::success('Traveler saved successfully.');
         return redirect(route('travelers.index'));
     }
 
@@ -95,6 +98,7 @@ class TravelerController extends Controller
     public function edit($id)
     {
         $traveler = User::findOrFail($id);
+        $activities = NeedActivity::pluck('activity', 'id');
 
         if (empty($traveler)) {
             Flash::error('Traveler not found');
@@ -107,7 +111,7 @@ class TravelerController extends Controller
         $cities = City::pluck('city', 'id');
         $genders = Gender::pluck('name','id');
 
-        return view('travelers.edit', compact('traveler', 'countries', 'languages', 'cities', 'genders'));
+        return view('travelers.edit', compact('traveler', 'countries', 'languages', 'cities', 'genders', 'activities'));
     }
 
     /**
@@ -128,10 +132,18 @@ class TravelerController extends Controller
             return redirect(route('travelers.index'));
         }
 
-        $traveler = $traveler->update($request->all());
+        $data = $request->all();
+
+        $basic_help = request()->get('basic_help', []);
+        $advanced_help = request()->get('advanced_help', []);
+        unset($data['basic_help']);
+        unset($data['advanced_help']);
+
+        $traveler->update($data);
+        $traveler->userBasicHelp()->sync($basic_help);
+        $traveler->userAdvancedHelp()->sync($advanced_help);
 
         Flash::success('Traveler updated successfully.');
-
         return redirect(route('travelers.index'));
     }
 

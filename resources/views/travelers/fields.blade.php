@@ -10,6 +10,12 @@
     {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
+<!-- Description Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('description', 'Descripción:') !!}
+    {!! Form::textArea('description', null, ['class' => 'form-control', 'rows'=> "3"]) !!}
+</div>
+
 <!-- Gender Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('gender', 'Gender:') !!}
@@ -46,28 +52,42 @@
     {!! Form::select('city_id', $cities, null, ['class' => 'form-control']) !!}
 </div>
 
+<div class="form-group col-sm-12">
+    <hr>
+</div>
+
+<!-- Language native Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('native_language', 'Lenguaje Nativo:') !!}
+    {!! Form::select('native_language', $languages, null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Language Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('language_id', 'Language Id:') !!}
+    {!! Form::label('language_id', 'Language Id 1:') !!}
     {!! Form::select('language_id', $languages, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Language Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('language_id', 'Language Id:') !!}
+    {!! Form::label('language_id', 'Language Id 2:') !!}
     {!! Form::select('language2_id', $languages, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Language Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('language_id', 'Language Id:') !!}
+    {!! Form::label('language_id', 'Language Id 3:') !!}
     {!! Form::select('language3_id', $languages, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Language Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('language_id', 'Language Id:') !!}
+    {!! Form::label('language_id', 'Language Id 4:') !!}
     {!! Form::select('language4_id', $languages, null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group col-sm-12">
+    <hr>
 </div>
 
 <!-- facebook Id Field -->
@@ -82,10 +102,55 @@
     {!! Form::text('vimeo', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- youtube Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('youtube', 'Youtube:') !!}
+    {!! Form::text('youtube', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group col-sm-12">
+    <hr>
+</div>
+
+<div class="form-group col-md-6">
+    {!! Form::label('basic_help', 'basic help:') !!}
+    {!! Form::select('basic_help', $activities, isset($traveler) ? $traveler->userBasicHelp : [], ['class' => 'form-control', 'multiple'=>'multiple', 'name' => "basic_help[]"]); !!}
+</div>
+
+<div class="form-group col-md-6">
+    {!! Form::label('advanced_help', 'advanced help:') !!}
+    {!! Form::select('advanced_help', $activities, isset($traveler) ? $traveler->userAdvancedHelp : [], ['class' => 'form-control', 'multiple'=>'multiple', 'name' => "advanced_help[]"]); !!}
+</div>
+
+<div class="form-group col-sm-12">
+    <hr>
+</div>
+
+<!-- about_me Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('about_me', 'about me:') !!}
+    {!! Form::textArea('about_me', null, ['class' => 'form-control','rows'=> "2"]) !!}
+</div>
+
+<!-- experience Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('experience', 'experience:') !!}
+    {!! Form::textArea('experience', null, ['class' => 'form-control','rows'=> "5"]) !!}
+</div>
+
+<div class="form-group col-sm-12">
+    <hr>
+</div>
+
 <!-- fecha de compra Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('payment_at', 'Fecha de compra:') !!}
     {!! Form::date('payment_at', null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group col-sm-6">
+    {!! Form::label('is_premium', 'Premium:') !!}
+    {!! Form::select('is_premium', [true => "Si", false=> "No"],null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->
