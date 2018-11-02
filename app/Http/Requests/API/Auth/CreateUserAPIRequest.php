@@ -23,14 +23,14 @@ class CreateUserAPIRequest extends FormRequest
      * @return array
      */
     public function rules(){
-    return [
-        'name'      => 'required',
-        'email'     => 'required|email|unique:users,email',
-        'gender_id' => 'required',
-        'birthday'  => 'required',
-        'phone'     => 'required',
-        'password'  => 'required',
-    ];
+        return [
+            'name'      => 'required',
+            'email'     => 'required|email|unique:users,email',
+            'gender_id' => 'required',
+            'birthday'  => 'required',
+            'phone'     => 'required',
+            'password'  => 'required',
+        ];
 }
 
     public function messages(){
