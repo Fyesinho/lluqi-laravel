@@ -144,7 +144,7 @@ class TravelerController extends Controller
      */
     public function destroy($id)
     {
-        $traveler = $this->travelerRepository->findWithoutFail($id);
+        $traveler = User::findOrFail($id);
 
         if (empty($traveler)) {
             Flash::error('Traveler not found');
@@ -152,7 +152,7 @@ class TravelerController extends Controller
             return redirect(route('travelers.index'));
         }
 
-        $this->travelerRepository->delete($id);
+        $traveler->delete();
 
         Flash::success('Traveler deleted successfully.');
 

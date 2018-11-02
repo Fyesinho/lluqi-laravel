@@ -24,6 +24,6 @@ class UpdateTravelerAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Traveler::$rules;
+        return [];
     }
 }

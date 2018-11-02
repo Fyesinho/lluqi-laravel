@@ -6,6 +6,7 @@ use App\Http\Requests\API\CreateTravelerAPIRequest;
 use App\Http\Requests\API\UpdateTravelerAPIRequest;
 use App\Models\Traveler;
 use App\Repositories\TravelerRepository;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
@@ -19,13 +20,6 @@ use Response;
 
 class TravelerAPIController extends AppBaseController
 {
-    /** @var  TravelerRepository */
-    private $travelerRepository;
-
-    public function __construct(TravelerRepository $travelerRepo)
-    {
-        $this->travelerRepository = $travelerRepo;
-    }
 
     /**
      * Display a listing of the Traveler.
@@ -34,12 +28,9 @@ class TravelerAPIController extends AppBaseController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $this->travelerRepository->pushCriteria(new RequestCriteria($request));
-        $this->travelerRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $travelers = $this->travelerRepository->all();
-
+        $travelers = User::traveler()->get();
         return $this->sendResponse($travelers->toArray(), 'Travelers retrieved successfully');
     }
 
@@ -54,8 +45,8 @@ class TravelerAPIController extends AppBaseController
     public function store(CreateTravelerAPIRequest $request)
     {
         $input = $request->all();
-
-        $travelers = $this->travelerRepository->create($input);
+        $input['role'] = User::ROLE_TRAVELER;
+        $travelers = User::create($input);
 
         return $this->sendResponse($travelers->toArray(), 'Traveler saved successfully');
     }
@@ -70,8 +61,7 @@ class TravelerAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var Traveler $traveler */
-        $traveler = $this->travelerRepository->findWithoutFail($id);
+        $traveler = User::findOrFail($id);
 
         if (empty($traveler)) {
             return $this->sendError('Traveler not found');
@@ -92,15 +82,13 @@ class TravelerAPIController extends AppBaseController
     public function update($id, UpdateTravelerAPIRequest $request)
     {
         $input = $request->all();
-
-        /** @var Traveler $traveler */
-        $traveler = $this->travelerRepository->findWithoutFail($id);
+        $traveler = User::findOrFail($id);
 
         if (empty($traveler)) {
             return $this->sendError('Traveler not found');
         }
 
-        $traveler = $this->travelerRepository->update($input, $id);
+        $traveler = $traveler->update($request->all());
 
         return $this->sendResponse($traveler->toArray(), 'Traveler updated successfully');
     }
@@ -115,15 +103,13 @@ class TravelerAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Traveler $traveler */
-        $traveler = $this->travelerRepository->findWithoutFail($id);
+        $traveler = User::findOrFail($id);
 
         if (empty($traveler)) {
             return $this->sendError('Traveler not found');
         }
 
         $traveler->delete();
-
         return $this->sendResponse($id, 'Traveler deleted successfully');
     }
 }
