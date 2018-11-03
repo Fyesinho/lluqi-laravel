@@ -24,7 +24,7 @@ class AddColumnsUser2 extends Migration
             $table->text('about_me')->nullable();
             $table->text('experience')->nullable();
 
-            $table->boolean('is_premium')->nullable();
+            $table->boolean('is_premium')->default(false);
         });
     }
 

@@ -31,6 +31,10 @@ class User extends Authenticatable
         'is_premium'
     ];
 
+    protected $casts = [
+        'is_premium' => 'bool'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *

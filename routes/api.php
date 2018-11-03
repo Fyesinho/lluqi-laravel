@@ -18,24 +18,22 @@ Route::post('register', 'UserAPIController@register');
 Route::post('logout', 'UserAPIController@logout');
 
 
-//Route::group(['middleware' => 'auth:api'], function(){
+Route::group(['middleware' => 'auth:api'], function(){
     Route::patch('user', 'UserAPIController@update');
+    Route::get('user', 'UserAPIController@getInfo');
+});
 
-    Route::resource('pruebas', 'PruebaAPIController');
-    Route::resource('languages', 'LanguageAPIController');
-    Route::resource('countries', 'CountryAPIController');
-    Route::resource('travelers', 'TravelerAPIController');
-    Route::resource('cities', 'CityAPIController');
-    Route::resource('need_activities', 'NeedActivityAPIController');
-    Route::resource('offers', 'OfferAPIController');
-    Route::resource('hostels', 'HostelAPIController');
-    Route::resource('genders', 'GenderAPIController');
-    Route::resource('hostels', 'HostelAPIController');
-    Route::resource('hostel_activities', 'HostelActivityAPIController');
-    Route::resource('hostel_offers', 'HostelOfferAPIController');
-    Route::resource('images', 'ImagesAPIController');
-    Route::resource('months', 'MonthAPIController');
-    Route::resource('hostel_months', 'HostelMonthAPIController');
-    Route::resource('genders', 'GenderAPIController');
-
-//});
+Route::resource('pruebas', 'PruebaAPIController');
+Route::resource('languages', 'LanguageAPIController');
+Route::resource('countries', 'CountryAPIController');
+Route::resource('travelers', 'TravelerAPIController');
+Route::resource('cities', 'CityAPIController');
+Route::resource('need_activities', 'NeedActivityAPIController');
+Route::resource('offers', 'OfferAPIController');
+Route::resource('hostels', 'HostelAPIController');
+Route::resource('hostel_activities', 'HostelActivityAPIController');
+Route::resource('hostel_offers', 'HostelOfferAPIController');
+Route::resource('images', 'ImagesAPIController');
+Route::resource('months', 'MonthAPIController');
+Route::resource('hostel_months', 'HostelMonthAPIController');
+Route::resource('genders', 'GenderAPIController');
