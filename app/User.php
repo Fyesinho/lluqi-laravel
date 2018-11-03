@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Models\City;
+use App\Models\Country;
+use App\Models\Gender;
 use App\Models\NeedActivity;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,6 +49,8 @@ class User extends Authenticatable implements HasMedia
         'password', 'remember_token',
     ];
 
+    /* ---- Relationship ---- */
+
     public function userBasicHelp(){
         return $this->belongsToMany(NeedActivity::class, 'user_basic_help', null, 'need_activities_id');
     }
@@ -54,6 +59,21 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsToMany(NeedActivity::class, 'user_advance_help', null, 'need_activities_id');
     }
 
+    public function city(){
+        return $this->belongsTo(City::class);
+    }
+
+    public function gender(){
+        return $this->belongsTo(Gender::class);
+    }
+
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
+    /* ---------------------- */
+
+
+    /* ------- Scope -------- */
     public function scopeAdmin($query){
         return $query->whereRole(self::ROLE_ADMIN);
     }
@@ -61,6 +81,7 @@ class User extends Authenticatable implements HasMedia
     public function scopeTraveler($query){
         return $query->whereRole(self::ROLE_TRAVELER);
     }
+    /* ---------------------- */
 
     public function getRole(){
         switch($this->role){

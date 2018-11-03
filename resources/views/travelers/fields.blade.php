@@ -12,7 +12,7 @@
 
 <div class="row" style="margin: auto">
     <!-- Avatar Field -->
-    <div class="form-group col-sm-4">
+    <div class="form-group col-sm-6">
         {!! Form::label('avatar', 'Avatar:') !!}
         @if(isset($traveler))
             @if(isset($traveler->getMedia('avatar')[0]))
@@ -23,7 +23,7 @@
     </div>
 
     <!-- Description Field -->
-    <div class="form-group col-sm-8">
+    <div class="form-group col-sm-6">
         {!! Form::label('description', 'Descripción:') !!}
         {!! Form::textArea('description', null, ['class' => 'form-control', 'rows'=> "3"]) !!}
     </div>

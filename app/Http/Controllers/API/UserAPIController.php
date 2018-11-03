@@ -72,8 +72,14 @@ class UserAPIController extends Controller{
     public function getInfo(){
         $user = Auth::guard('api')->user();
 
-        $user->basic_help = $user->userBasicHelp;
-        $user->advance_help = $user->advance_help;
+        $user->city;
+        $user->gender;
+        $user->userBasicHelp;
+        $user->userAdvancedHelp;
+
+        unset($user->gender_id);
+        unset($user->city_id);
+        unset($user->country_id);
 
         return response()->json([$user], 200);
     }
