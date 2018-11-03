@@ -14,8 +14,10 @@
     <!-- Avatar Field -->
     <div class="form-group col-sm-4">
         {!! Form::label('avatar', 'Avatar:') !!}
-        @if(isset($traveler->getMedia('avatar')[0]))
-            <img src="/{{ $traveler->getMedia('avatar')[0]->disk}}/{{ $traveler->getMedia('avatar')[0]->id}}/{{ $traveler->getMedia('avatar')[0]->file_name}}" style="width: 100px; display: block; margin: 5px auto">
+        @if(isset($traveler))
+            @if(isset($traveler->getMedia('avatar')[0]))
+                <img src="/{{ $traveler->getMedia('avatar')[0]->disk}}/{{ $traveler->getMedia('avatar')[0]->id}}/{{ $traveler->getMedia('avatar')[0]->file_name}}" style="width: 100px; display: block; margin: 5px auto">
+            @endif
         @endif
         {!! Form::file('avatar', ['class' => 'form-control', "accept" => 'image/*']) !!}
     </div>
