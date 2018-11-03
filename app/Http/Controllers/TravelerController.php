@@ -63,12 +63,15 @@ class TravelerController extends Controller
 
         $basic_help = request()->get('basic_help', []);
         $advanced_help = request()->get('advanced_help', []);
+        $avatar = request()->file('avatar', '');
         unset($input['basic_help']);
         unset($input['advanced_help']);
+        unset($input['avatar']);
 
         $traveler = User::create($input);
         $traveler->userBasicHelp()->sync($basic_help);
         $traveler->userAdvancedHelp()->sync($advanced_help);
+        $traveler->addMedia($avatar)->toMediaCollection('avatar');
 
         Flash::success('Traveler saved successfully.');
         return redirect(route('travelers.index'));
@@ -142,12 +145,18 @@ class TravelerController extends Controller
 
         $basic_help = request()->get('basic_help', []);
         $advanced_help = request()->get('advanced_help', []);
+        $avatar = request()->file('avatar', '');
         unset($data['basic_help']);
         unset($data['advanced_help']);
+        unset($data['avatar']);
 
         $traveler->update($data);
         $traveler->userBasicHelp()->sync($basic_help);
         $traveler->userAdvancedHelp()->sync($advanced_help);
+        if($traveler->getMedia('avatar')->count()>0){
+            $traveler->clearMediaCollection('avatar');
+        }
+        $traveler->addMedia($avatar)->toMediaCollection('avatar');
 
         Flash::success('Traveler updated successfully.');
         return redirect(route('travelers.index'));

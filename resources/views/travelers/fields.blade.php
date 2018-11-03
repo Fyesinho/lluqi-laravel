@@ -10,10 +10,21 @@
     {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
-<!-- Description Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('description', 'Descripción:') !!}
-    {!! Form::textArea('description', null, ['class' => 'form-control', 'rows'=> "3"]) !!}
+<div class="row" style="margin: auto">
+    <!-- Avatar Field -->
+    <div class="form-group col-sm-4">
+        {!! Form::label('avatar', 'Avatar:') !!}
+        @if(isset($traveler->getMedia('avatar')[0]))
+            <img src="/{{ $traveler->getMedia('avatar')[0]->disk}}/{{ $traveler->getMedia('avatar')[0]->id}}/{{ $traveler->getMedia('avatar')[0]->file_name}}" style="width: 100px; display: block; margin: 5px auto">
+        @endif
+        {!! Form::file('avatar', ['class' => 'form-control', "accept" => 'image/*']) !!}
+    </div>
+
+    <!-- Description Field -->
+    <div class="form-group col-sm-8">
+        {!! Form::label('description', 'Descripción:') !!}
+        {!! Form::textArea('description', null, ['class' => 'form-control', 'rows'=> "3"]) !!}
+    </div>
 </div>
 
 <!-- Gender Field -->
