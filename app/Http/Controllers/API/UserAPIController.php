@@ -34,6 +34,7 @@ class UserAPIController extends Controller{
 
         $infoToken->token->save();
         $data =  [
+            'user'      => $request->user(),
             'token_type' => 'Bearer',
             'access_token' => $infoToken->accessToken,
             'expires_at' => Carbon::parse($infoToken->token->expires_at)->toDateTimeString()
