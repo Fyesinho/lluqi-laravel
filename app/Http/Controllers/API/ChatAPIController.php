@@ -54,6 +54,11 @@ class ChatAPIController extends Controller{
         $user = Auth::guard('api')->user();
         $message = request()->get('message','');
 
+        $chat = Chat::find($idChat);
+        if (!isset($chat) || !$chat){
+            return response()->json(['message' => 'Chat not found'], 400);
+        }
+
         Message::create([
             'text'      => $message,
             'chat_id'   => $idChat,
