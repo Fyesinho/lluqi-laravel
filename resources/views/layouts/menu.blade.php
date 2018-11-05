@@ -51,6 +51,9 @@
     <a href="{!! route('images.index') !!}"><i class="fa fa-image"></i><span>Images</span></a>
 </li>
 
+<li class="{{ Request::is('chat*') ? 'active' : '' }}">
+    <a href="{!! route('chats') !!}"><i class="fa fa-comments"></i><span>Chats</span></a>
+</li>
 
 
 

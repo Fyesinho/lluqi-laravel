@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Chat;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Gender;
@@ -69,6 +70,10 @@ class User extends Authenticatable implements HasMedia
 
     public function country(){
         return $this->belongsTo(Country::class);
+    }
+
+    public function chats(){
+        return $this->belongsToMany(Chat::class, 'chat_users');
     }
     /* ---------------------- */
 
