@@ -44,7 +44,7 @@
 <!-- Password Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('password', 'Password:') !!}
-    {!! Form::text('password', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::password('password', ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Phone Field -->
