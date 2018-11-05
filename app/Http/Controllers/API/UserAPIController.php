@@ -31,10 +31,14 @@ class UserAPIController extends Controller{
 
         $infoToken = $request->user()->createToken('PAT');
         $infoToken->token->expires_at = Carbon::now()->addDays(1);
-
         $infoToken->token->save();
+
+        $user = $request->user();
+        $user->avatar = isset($user->getMedia('avatar')[0]) ? $user->getMedia('avatar')[0] : '';
+        unset($user->media);
+
         $data =  [
-            'user'      => $request->user(),
+            'user'      => $user,
             'token_type' => 'Bearer',
             'access_token' => $infoToken->accessToken,
             'expires_at' => Carbon::parse($infoToken->token->expires_at)->toDateTimeString()
@@ -73,6 +77,7 @@ class UserAPIController extends Controller{
     public function getInfo(){
         $user = Auth::guard('api')->user();
 
+        $user->avatar = isset($user->getMedia('avatar')[0]) ? $user->getMedia('avatar')[0] : '';
         $user->city;
         $user->gender;
         $user->userBasicHelp;
@@ -81,6 +86,7 @@ class UserAPIController extends Controller{
         unset($user->gender_id);
         unset($user->city_id);
         unset($user->country_id);
+        unset($user->media);
 
         return response()->json([$user], 200);
     }
