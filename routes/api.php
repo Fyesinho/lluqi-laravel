@@ -21,6 +21,11 @@ Route::post('logout', 'UserAPIController@logout');
 Route::group(['middleware' => 'auth:api'], function(){
     Route::patch('user', 'UserAPIController@update');
     Route::get('user', 'UserAPIController@getInfo');
+
+    Route::post('chat', 'ChatAPIController@createChat');
+    Route::get('chat', 'ChatAPIController@chats');
+    Route::get('chat/{id}', 'ChatAPIController@messages');
+    Route::post('chat/{id}/message', 'ChatAPIController@newMessage');
 });
 
 Route::resource('pruebas', 'PruebaAPIController');
@@ -37,9 +42,4 @@ Route::resource('images', 'ImagesAPIController');
 Route::resource('months', 'MonthAPIController');
 Route::resource('hostel_months', 'HostelMonthAPIController');
 Route::resource('genders', 'GenderAPIController');
-
-Route::post('createChat', 'ChatAPIController@createChat');
-Route::get('chats', 'ChatAPIController@chats');
-Route::get('chats/{id}', 'ChatAPIController@messages');
-Route::post('chats/{id}/message', 'ChatAPIController@newMessage');
 

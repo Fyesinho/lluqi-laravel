@@ -15,6 +15,10 @@ class ChatAPIController extends Controller{
         $user = Auth::guard('api')->user();
         $userId = request()->get('user_id');
 
+        if(!isset($userId) || $userId==null){
+            return response()->json(['message' => 'user_id is required'], 400);
+        }
+
         $chat = Chat::create();
 
         ChatUser::create([
