@@ -68,6 +68,12 @@ class TravelerController extends Controller
         unset($input['advanced_help']);
         unset($input['avatar']);
 
+        if(empty($data['password'])){
+            unset($data['password']);
+        }else {
+            $data['password'] = bcrypt($data['password']);
+        }
+
         $traveler = User::create($input);
         $traveler->userBasicHelp()->sync($basic_help);
         $traveler->userAdvancedHelp()->sync($advanced_help);
@@ -152,6 +158,12 @@ class TravelerController extends Controller
         unset($data['basic_help']);
         unset($data['advanced_help']);
         unset($data['avatar']);
+
+        if(empty($data['password'])){
+            unset($data['password']);
+        }else {
+            $data['password'] = bcrypt($data['password']);
+        }
 
         $traveler->update($data);
         $traveler->userBasicHelp()->sync($basic_help);
