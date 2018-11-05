@@ -15,8 +15,8 @@
             <td>{!! $traveler->email !!}</td>
             <td>{!! $traveler->name !!}</td>
             <td>{!! $traveler->phone !!}</td>
-            <td>{!! $traveler->country->name !!}</td>
-            <td>{!! $traveler->city->city !!}</td>
+            <td>{!! isset($traveler->country) ? $traveler->country->name : '' !!}</td>
+            <td>{!! isset($traveler->city) ? $traveler->city->city : '' !!}</td>
             <td>
                 {!! Form::open(['route' => ['travelers.destroy', $traveler->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

@@ -37,3 +37,9 @@ Route::resource('images', 'ImagesAPIController');
 Route::resource('months', 'MonthAPIController');
 Route::resource('hostel_months', 'HostelMonthAPIController');
 Route::resource('genders', 'GenderAPIController');
+
+Route::post('createChat', 'ChatAPIController@createChat');
+Route::get('chats', 'ChatAPIController@chats');
+Route::get('chats/{id}', 'ChatAPIController@messages');
+Route::post('chats/{id}/message', 'ChatAPIController@newMessage');
+
