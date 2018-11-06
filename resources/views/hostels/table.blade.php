@@ -5,16 +5,16 @@
         <th>Avatar</th>
         <th>Nombre Anfitrión</th>
         <th>Ciudad</th>
-        <th>Foto Principal</th>
+        {{--<th>Foto Principal</th>
         <th>Perfil Verificado</th>
         <th>Semanas Mínimas</th>
         <th>Semanas Máximas</th>
-        <th>Viajeros Recibidos</th>
+        <th>Viajeros Recibidos</th>--}}
         <th>Calificación</th>
-        <th>Web</th>
+        {{--<th>Web</th>
         <th>Phone</th>
-        <th>Descripción</th>
-            <th colspan="3">Action</th>
+        <th>Descripción</th>--}}
+        <th colspan="3">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -23,16 +23,16 @@
             <td>{!! $hostel->name_hostel !!}</td>
             <td><img src="{{URL::asset($hostel->avatar)}}" alt="profile Pic" height="40" width="40"/></td>
             <td>{!! $hostel->name_host !!}</td>
-            <td>{!! $hostel->city_id !!}
-            <td><img src="{{URL::asset($hostel->main_picture)}}" alt="profile Pic" height="40"/></td>
+            <td>{!! $hostel->city->city !!}
+           {{-- <td><img src="{{URL::asset($hostel->main_picture)}}" alt="profile Pic" height="40"/></td>
             <td>{!! $hostel->verified !!}</td>
             <td>{!! $hostel->start_stay !!}</td>
             <td>{!! $hostel->end_stay !!}</td>
-            <td>{!! $hostel->travelers_reciebed !!}</td>
+            <td>{!! $hostel->travelers_reciebed !!}</td>--}}
             <td>{!! $hostel->calification !!}</td>
-            <td>{!! $hostel->web !!}</td>
+            {{--<td>{!! $hostel->web !!}</td>
             <td>{!! $hostel->phone !!}</td>
-            <td>{!! $hostel->description !!}</td>
+            <td>{!! $hostel->description !!}</td>--}}
             <td>
                 {!! Form::open(['route' => ['hostels.destroy', $hostel->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

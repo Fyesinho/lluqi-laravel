@@ -13,7 +13,7 @@
 <!-- Name Hostel Field -->
 <div class="form-group">
     {!! Form::label('avatar', 'Avatar:') !!}
-    {!! HTML::image($hostel->avatar, 'avatar') !!}}
+    <img src="{{URL::asset($hostel->avatar)}}" alt="profile Pic" height="40" width="40"/>
     <p>{!! $hostel->avatar !!}</p>
 </div>
 
