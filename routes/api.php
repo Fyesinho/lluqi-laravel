@@ -43,3 +43,5 @@ Route::resource('months', 'MonthAPIController');
 Route::resource('hostel_months', 'HostelMonthAPIController');
 Route::resource('genders', 'GenderAPIController');
 
+Route::get('destinations', 'DestinationsAPIController@index');
+

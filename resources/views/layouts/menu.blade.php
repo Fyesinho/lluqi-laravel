@@ -2,6 +2,30 @@
     <a href="{!! route('travelers.index') !!}"><i class="fa fa-suitcase"></i><span>Viajeros</span></a>
 </li>
 
+<li class="{{ Request::is('destination*') ? 'active' : '' }}">
+    <a href="{!! route('destination.index') !!}"><i class="fa fa-suitcase"></i><span>Destinos</span></a>
+</li>
+
+<li class="{{ Request::is('hostels*') ? 'active' : '' }}">
+    <a href="{!! route('hostels.index') !!}"><i class="fa fa-hotel"></i><span>Hostales</span></a>
+</li>
+
+<li class="{{ Request::is('needActivities*') ? 'active' : '' }}">
+    <a href="{!! route('needActivities.index') !!}"><i class="fa fa-list-ol"></i><span>Actividades</span></a>
+</li>
+
+<li class="{{ Request::is('offers*') ? 'active' : '' }}">
+    <a href="{!! route('offers.index') !!}"><i class="fa fa-edit"></i><span>Ofrecimientos</span></a>
+</li>
+
+<li class="{{ Request::is('images*') ? 'active' : '' }}">
+    <a href="{!! route('images.index') !!}"><i class="fa fa-image"></i><span>Images</span></a>
+</li>
+
+<li class="{{ Request::is('chat*') ? 'active' : '' }}">
+    <a href="{!! route('chats') !!}"><i class="fa fa-comments"></i><span>Chats</span></a>
+</li>
+
 <li>
     <a href="#" style="margin-bottom: -10px"><i class="fa fa-cogs"></i><span>Parámetros generales</span></a>
     <ul class="menu-ul">
@@ -33,28 +57,6 @@
         </li>
     </ul>
 </li>
-
-
-<li class="{{ Request::is('hostels*') ? 'active' : '' }}">
-    <a href="{!! route('hostels.index') !!}"><i class="fa fa-hotel"></i><span>Hostales</span></a>
-</li>
-
-<li class="{{ Request::is('needActivities*') ? 'active' : '' }}">
-    <a href="{!! route('needActivities.index') !!}"><i class="fa fa-list-ol"></i><span>Actividades</span></a>
-</li>
-
-<li class="{{ Request::is('offers*') ? 'active' : '' }}">
-    <a href="{!! route('offers.index') !!}"><i class="fa fa-edit"></i><span>Ofrecimientos</span></a>
-</li>
-
-<li class="{{ Request::is('images*') ? 'active' : '' }}">
-    <a href="{!! route('images.index') !!}"><i class="fa fa-image"></i><span>Images</span></a>
-</li>
-
-<li class="{{ Request::is('chat*') ? 'active' : '' }}">
-    <a href="{!! route('chats') !!}"><i class="fa fa-comments"></i><span>Chats</span></a>
-</li>
-
 
 
 

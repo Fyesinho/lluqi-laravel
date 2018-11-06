@@ -39,7 +39,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('months', 'MonthController');
     Route::resource('hostelMonths', 'HostelMonthController');
     Route::resource('genders', 'GenderController');
-});
 
-Route::get('chat', 'ChatController@chats')->name('chats');
-Route::get('chat/{id}', 'ChatController@chatById')->name('chatById');
+    Route::get('chat', 'ChatController@chats')->name('chats');
+    Route::get('chat/{id}', 'ChatController@chatById')->name('chatById');
+
+    Route::resource('destination', 'DestinationsController');
+});
