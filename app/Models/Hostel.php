@@ -96,5 +96,40 @@ class Hostel extends Model
     public function activities() {
         return $this->belongsToMany(NeedActivity::class, 'hostel_activities', 'hostel_id', 'activity_id');
     }
+
+    public function scopeSearch($query){
+        Log::info(request()->all());
+
+        //$country = request()->get('country');
+        $city = request()->get('city');
+        $month = request()->get('month');
+        $offers = request()->get('offers');
+        $activities =  request()->get('activities');
+
+        if(isset($city) && $city){
+            $query->whereIn('city_id', explode(',', $city));
+        }
+
+        if(isset($month) && $month){
+            $query->whereHas('months', function ($query) use ($month) {
+                $query->whereIn('months.id', explode(",",$month));
+            });
+        }
+
+        if(isset($offers) && $offers){
+            $query->whereHas('offers', function ($query) use ($offers) {
+                $query->whereIn('offers.id', explode(",",$offers));
+            });
+        }
+
+        if(isset($activities) && $activities){
+            $query->whereHas('activities', function ($query) use ($activities) {
+                $query->whereIn('need_activities.id', explode(",",$activities));
+            });
+        }
+
+        return $query;
+    }
+
     
 }
