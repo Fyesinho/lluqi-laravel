@@ -98,7 +98,7 @@ class Hostel extends Model
     }
 
     public function scopeSearch($query){
-        Log::info(request()->all());
+        //Log::info(request()->all());
 
         //$country = request()->get('country');
         $city = request()->get('city');

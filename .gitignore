@@ -10,3 +10,4 @@ Homestead.yaml
 npm-debug.log
 /_ide_helper.php
 .env
+/public/media/
