@@ -101,10 +101,15 @@ class Hostel extends Model
         //Log::info(request()->all());
 
         //$country = request()->get('country');
+        $s = request()->get('s');
         $city = request()->get('city');
         $month = request()->get('month');
         $offers = request()->get('offers');
         $activities =  request()->get('activities');
+
+        if(isset($s) && $s){
+            $query->where('name_hostel', 'like', '%'.$s.'%');
+        }
 
         if(isset($city) && $city){
             $query->whereIn('city_id', explode(',', $city));
