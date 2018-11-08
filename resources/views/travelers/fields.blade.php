@@ -1,3 +1,5 @@
+{!! Form::hidden('id', null, []) !!}
+
 <!-- Email Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('email', 'Email:') !!}
@@ -44,7 +46,7 @@
 <!-- Password Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('password', 'Password:') !!}
-    {!! Form::password('password', ['class' => 'form-control', 'required']) !!}
+    {!! Form::password('password', ['class' => 'form-control']) !!}
 </div>
 
 <!-- Phone Field -->
@@ -63,6 +65,15 @@
 <div class="form-group col-sm-6">
     {!! Form::label('city', 'City:') !!}
     {!! Form::select('city_id', $cities, null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group col-sm-12">
+    <hr>
+</div>
+
+<div class="form-group col-sm-12">
+    {!! Form::label('role', 'Rol:') !!}
+    {!! Form::select('role', $roles, null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group col-sm-12">

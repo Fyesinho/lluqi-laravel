@@ -1,3 +1,8 @@
+<li class="{{ Request::is('user*') ? 'active' : '' }}">
+    <a href="{!! route('user.index') !!}"><i class="fa fa-users"></i><span>Usuarios</span></a>
+</li>
+
+
 <li class="{{ Request::is('travelers*') ? 'active' : '' }}">
     <a href="{!! route('travelers.index') !!}"><i class="fa fa-suitcase"></i><span>Viajeros</span></a>
 </li>

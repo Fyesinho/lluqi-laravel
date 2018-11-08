@@ -18,7 +18,13 @@ class User extends Authenticatable implements HasMedia
     use Notifiable, HasApiTokens, HasMediaTrait;
 
     const ROLE_ADMIN = "ADMIN";
+    const ROLE_ADMIN_TEXT = "Administrador";
+
     const ROLE_TRAVELER = "TRAVELER";
+    const ROLE_TRAVELER_TEXT = "Viajero";
+
+    const ROLE_HOSTEL = "HOSTEL";
+    const ROLE_HOSTEL_TEXT = "Hostal";
 
     /**
      * The attributes that are mass assignable.
@@ -91,10 +97,13 @@ class User extends Authenticatable implements HasMedia
     public function getRole(){
         switch($this->role){
             case self::ROLE_ADMIN:
-                return "Administrador";
+                return self::ROLE_ADMIN_TEXT;
 
             case self::ROLE_TRAVELER:
-                return "Viajero";
+                return self::ROLE_TRAVELER_TEXT;
+
+            case self::ROLE_HOSTEL:
+                return self::ROLE_HOSTEL_TEXT;
 
             default:
                 return '';

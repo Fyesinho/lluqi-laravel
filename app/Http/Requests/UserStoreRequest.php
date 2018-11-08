@@ -2,13 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\User;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Traveler;
 
-class UpdateTravelerRequest extends FormRequest
+class UserStoreRequest extends FormRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,14 +21,15 @@ class UpdateTravelerRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(){
-        $user = User::find($this['id']);
+    public function rules()
+    {
         return [
             'name'      => 'required',
-            'email'     => 'required|email|unique:users,email,' . $user->id,
+            'email'     => 'required|email|unique:users',
             'gender_id' => 'required',
             'birthday'  => 'required',
             'phone'     => 'required',
+            'password'  => 'required',
         ];
     }
 
@@ -46,6 +44,7 @@ class UpdateTravelerRequest extends FormRequest
             'gender_id.required'=> 'Campo genero es requerido',
             'birthday.required' => 'Campo fecha de nacimiento es requerido',
             'phone.required'    => 'Campo telefono es requerido',
+            'password.required' => 'Campo password es requerido'
         ];
     }
 }
