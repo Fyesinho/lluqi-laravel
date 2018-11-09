@@ -1,3 +1,15 @@
+<div class="form-group col-sm-12">
+    {!! Form::label('user_id', 'Usuario:') !!}
+    <select class="form-control" id="user_id" name="user_id">
+        <option value="0" @if(!isset($hostel)) selected @endif> Sin asignar</option>
+
+        @foreach($users as $id => $user)
+            <option value="{{$id}}" @if(isset($hostel) && $id == $hostel->user_id) selected @endif >{{ $user }}</option>
+        @endforeach
+    </select>
+</div>
+
+
 <!-- Name Hostel Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('name_hostel', 'Name Hostel:') !!}
@@ -71,9 +83,9 @@
 </div>
 
 <!-- Description Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-12">
     {!! Form::label('description', 'Description:') !!}
-    {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+    {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => '4']) !!}
 </div>
 
 <!-- Submit Field -->

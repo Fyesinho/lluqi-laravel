@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -27,10 +28,8 @@ class Hostel extends Model
     use SoftDeletes;
 
     public $table = 'hostels';
-    
 
     protected $dates = ['deleted_at'];
-
 
     public $fillable = [
         'avatar',
@@ -45,7 +44,8 @@ class Hostel extends Model
         'calification',
         'web',
         'phone',
-        'description'
+        'description',
+        'user_id'
     ];
 
     /**
@@ -95,6 +95,10 @@ class Hostel extends Model
 
     public function activities() {
         return $this->belongsToMany(NeedActivity::class, 'hostel_activities', 'hostel_id', 'activity_id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
     public function scopeSearch($query){
