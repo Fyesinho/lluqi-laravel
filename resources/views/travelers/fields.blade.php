@@ -174,7 +174,7 @@
 
 <div class="form-group col-sm-6">
     {!! Form::label('is_premium', 'Premium:') !!}
-    {!! Form::select('is_premium', [true => "Si", false=> "No"],null, ['class' => 'form-control']) !!}
+    {!! Form::select('is_premium', $is_premium,null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->

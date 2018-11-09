@@ -18,14 +18,25 @@ class User extends Authenticatable implements HasMedia
 {
     use Notifiable, HasApiTokens, HasMediaTrait;
 
-    const ROLE_ADMIN = "ADMIN";
-    const ROLE_ADMIN_TEXT = "Administrador";
+    /* ------------------------ ROLES  -------------------------*/
+    const ROLE_ADMIN            = "ADMIN";
+    const ROLE_ADMIN_TEXT       = "Administrador";
 
-    const ROLE_TRAVELER = "TRAVELER";
-    const ROLE_TRAVELER_TEXT = "Viajero";
+    const ROLE_TRAVELER         = "TRAVELER";
+    const ROLE_TRAVELER_TEXT    = "Viajero";
 
-    const ROLE_HOSTEL = "HOSTEL";
-    const ROLE_HOSTEL_TEXT = "Hostal";
+    const ROLE_HOSTEL           = "HOSTEL";
+    const ROLE_HOSTEL_TEXT      = "Hostal";
+
+    /* ------------------------ TYPE PREMIUM TRAVELER ----------------------- */
+    const TRAVELER_TYPE_PRO         = 'is_pro';
+    const TRAVELER_TYPE_PRO_TEXT    = 'PRO';
+
+    const TRAVELER_TYPE_PROPLUS     = 'is_proplus';
+    const TRAVELER_TYPE_PROPLUS_TEXT= 'PRO PLUS';
+
+    const TRAVELER_TYPE_GOLD        = 'is_gold';
+    const TRAVELER_TYPE_GOLD_TEXT   = 'GOLD';
 
     /**
      * The attributes that are mass assignable.
@@ -45,7 +56,6 @@ class User extends Authenticatable implements HasMedia
     ];
 
     protected $casts = [
-        'is_premium' => 'bool'
     ];
 
     /**

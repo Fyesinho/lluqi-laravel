@@ -46,12 +46,19 @@ class TravelerController extends Controller
         $genders = Gender::pluck('name','id');
         $activities = NeedActivity::pluck('activity', 'id');
         $roles = [
-            User::ROLE_ADMIN => User::ROLE_ADMIN_TEXT,
+            User::ROLE_ADMIN    => User::ROLE_ADMIN_TEXT,
             User::ROLE_TRAVELER => User::ROLE_TRAVELER_TEXT,
-            User::ROLE_HOSTEL => User::ROLE_HOSTEL_TEXT
+            User::ROLE_HOSTEL   => User::ROLE_HOSTEL_TEXT
         ];
 
-        return view('travelers.create', compact('countries', 'languages', 'cities', 'genders', 'activities', 'roles'));
+        $is_premium = [
+            'false'                     => '------',
+            User::TRAVELER_TYPE_PRO     => User::TRAVELER_TYPE_PRO_TEXT,
+            User::TRAVELER_TYPE_PROPLUS => User::TRAVELER_TYPE_PROPLUS_TEXT,
+            User::TRAVELER_TYPE_GOLD    => User::TRAVELER_TYPE_GOLD_TEXT,
+        ];
+
+        return view('travelers.create', compact('countries', 'languages', 'cities', 'genders', 'activities', 'roles', 'is_premium'));
     }
 
     /**
@@ -134,12 +141,19 @@ class TravelerController extends Controller
         $cities = City::pluck('city', 'id');
         $genders = Gender::pluck('name','id');
         $roles = [
-            User::ROLE_ADMIN => User::ROLE_ADMIN_TEXT,
+            User::ROLE_ADMIN    => User::ROLE_ADMIN_TEXT,
             User::ROLE_TRAVELER => User::ROLE_TRAVELER_TEXT,
-            User::ROLE_HOSTEL => User::ROLE_HOSTEL_TEXT
+            User::ROLE_HOSTEL   => User::ROLE_HOSTEL_TEXT
         ];
 
-        return view('travelers.edit', compact('traveler', 'countries', 'languages', 'cities', 'genders', 'activities', 'roles'));
+        $is_premium = [
+            'false'                     => '------',
+            User::TRAVELER_TYPE_PRO     => User::TRAVELER_TYPE_PRO_TEXT,
+            User::TRAVELER_TYPE_PROPLUS => User::TRAVELER_TYPE_PROPLUS_TEXT,
+            User::TRAVELER_TYPE_GOLD    => User::TRAVELER_TYPE_GOLD_TEXT,
+        ];
+
+        return view('travelers.edit', compact('traveler', 'countries', 'languages', 'cities', 'genders', 'activities', 'roles', 'is_premium'));
     }
 
     /**
