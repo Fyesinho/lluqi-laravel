@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateHostelOfferRequest;
 use App\Http\Requests\UpdateHostelOfferRequest;
 use App\Models\Hostel;
+use App\Models\HostelOffer;
 use App\Models\Offer;
 use App\Repositories\HostelOfferRepository;
 use App\Http\Controllers\AppBaseController;
@@ -60,6 +61,12 @@ class HostelOfferController extends AppBaseController
     public function store(CreateHostelOfferRequest $request)
     {
         $input = $request->all();
+
+        $response = HostelOffer::where('hostel_id', $input['hostel_id'])->where('offer_id',$input['offer_id'])->get();
+        if($response && count($response)>0){
+            Flash::error('Relación Hostal - Ofrecimiento ya existe !');
+            return redirect(route('hostelOffers.index'));
+        }
 
         $hostelOffer = $this->hostelOfferRepository->create($input);
 

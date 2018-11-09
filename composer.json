@@ -16,6 +16,7 @@
         "laravel/passport": "~4.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
+        "sendgrid/sendgrid": "^7.2",
         "spatie/laravel-medialibrary": "^5.0.0"
     },
     "require-dev": {
