@@ -8,6 +8,7 @@ use App\Models\City;
 use App\Models\Hostel;
 use App\Repositories\HostelRepository;
 use App\Http\Controllers\AppBaseController;
+use App\User;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -45,7 +46,8 @@ class HostelController extends AppBaseController
     public function create()
     {
         $cities = City::pluck('city', 'id');
-        return view('hostels.create', compact('cities'));
+        $users = User::hostel()->pluck('name', 'id');
+        return view('hostels.create', compact('cities', 'users'));
     }
 
     /**
@@ -96,14 +98,17 @@ class HostelController extends AppBaseController
     public function edit($id)
     {
         $hostel = $this->hostelRepository->findWithoutFail($id);
-        $cities = City::pluck('city', 'id');
+
         if (empty($hostel)) {
             Flash::error('Hostel not found');
 
             return redirect(route('hostels.index'));
         }
 
-        return view('hostels.edit', compact('cities'))->with('hostel', $hostel);
+        $cities = City::pluck('city', 'id');
+        $users = User::hostel()->pluck('name', 'id');
+
+        return view('hostels.edit', compact('cities','users', 'hostel'));
     }
 
     /**
@@ -120,7 +125,12 @@ class HostelController extends AppBaseController
 
         if (empty($hostel)) {
             Flash::error('Hostel not found');
+            return redirect(route('hostels.index'));
+        }
 
+        $totalUser = Hostel::where('user_id',$request->get('user_id'))->count();
+        if($totalUser >= 1 && intval($request->get('user_id')) !== $hostel->user_id){
+            Flash::error('El usuario ya tiene un Hostal asignado');
             return redirect(route('hostels.index'));
         }
 

@@ -44,4 +44,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('chat/{id}', 'ChatController@chatById')->name('chatById');
 
     Route::resource('destination', 'DestinationsController');
+    Route::resource('user', 'UserController');
 });
