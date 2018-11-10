@@ -70,7 +70,21 @@ class UserAPIController extends Controller{
             $data['password'] = bcrypt($data['password']);
         }
 
+        $basic = isset($data['basic_help']) ? explode(",",$data['basic_help']) : [];
+        if(isset($data['basic_help']) && count($basic)>0){
+            $user->userBasicHelp()->sync($basic);
+            unset($data['basic_help']);
+        }
+
+        $advanced = isset($data['advanced_help']) ? explode(",",$data['advanced_help']) : [];
+        if(isset($data['advanced_help']) && count($advanced)>0){
+            $user->userAdvancedHelp()->sync($advanced);
+            unset($data['advanced_help']);
+        }
+
         $user->update($data);
+        $user->userBasicHelp;
+        $user->userAdvancedHelp;
         return response()->json([$user], 200);
     }
 
