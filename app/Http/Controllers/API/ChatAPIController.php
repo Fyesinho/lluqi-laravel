@@ -46,7 +46,7 @@ class ChatAPIController extends Controller{
             return response()->json(['message' => 'Chat not found'], 400);
         }
 
-        $messages = $chat->messages->load('user');
+        $messages = $chat->messages->load('user')->sortByDesc('created_at');
         return response()->json($messages, 200);
     }
 
