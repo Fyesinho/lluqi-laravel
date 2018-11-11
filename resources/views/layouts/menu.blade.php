@@ -31,6 +31,10 @@
     <a href="{!! route('chats') !!}"><i class="fa fa-comments"></i><span>Chats</span></a>
 </li>
 
+<li class="{{ Request::is('testimonial*') ? 'active' : '' }}">
+    <a href="{!! route('testimonial.index') !!}"><i class="fa fa-comment"></i><span>Testimonios</span></a>
+</li>
+
 <li>
     <a href="#" style="margin-bottom: -10px"><i class="fa fa-cogs"></i><span>Parámetros generales</span></a>
     <ul class="menu-ul">
