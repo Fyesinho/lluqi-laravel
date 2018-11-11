@@ -128,10 +128,12 @@ class HostelController extends AppBaseController
             return redirect(route('hostels.index'));
         }
 
-        $totalUser = Hostel::where('user_id',$request->get('user_id'))->count();
-        if($totalUser >= 1 && intval($request->get('user_id')) !== $hostel->user_id){
-            Flash::error('El usuario ya tiene un Hostal asignado');
-            return redirect(route('hostels.index'));
+        if($request->get('user_id') != 0){
+            $totalUser = Hostel::where('user_id',$request->get('user_id'))->count();
+            if($totalUser >= 1 && intval($request->get('user_id')) !== $hostel->user_id){
+                Flash::error('El usuario ya tiene un Hostal asignado');
+                return redirect(route('hostels.index'));
+            }
         }
 
         $hostel = $this->hostelRepository->update($request->all(), $id);
