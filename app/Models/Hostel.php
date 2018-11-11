@@ -104,8 +104,8 @@ class Hostel extends Model
     public function scopeSearch($query){
         //Log::info(request()->all());
 
-        //$country = request()->get('country');
         $s = request()->get('s');
+        $country = request()->get('country');
         $city = request()->get('city');
         $month = request()->get('month');
         $offers = request()->get('offers');
@@ -113,6 +113,12 @@ class Hostel extends Model
 
         if(isset($s) && $s){
             $query->where('name_hostel', 'like', '%'.$s.'%');
+        }
+
+        if(isset($country) && $country){
+            $query->whereHas('city', function($query) use($country){
+                $query->whereIn("country_id",explode(',',$country));
+            });
         }
 
         if(isset($city) && $city){

@@ -42,5 +42,8 @@ class Country extends Model
         
     ];
 
+    public function hostels(){
+        return $this->hasMany(Hostel::class);
+    }
     
 }
