@@ -82,9 +82,19 @@ class UserAPIController extends Controller{
             unset($data['advanced_help']);
         }
 
+        $avatar = request()->file('avatar');
+        if(isset($avatar) && $avatar!=''){
+            if($user->getMedia('avatar')->count()>0){
+                $user->clearMediaCollection('avatar');
+            }
+            $user->addMedia($avatar)->toMediaCollection('avatar');
+            unset($data['avatar']);
+        }
+
         $user->update($data);
         $user->userBasicHelp;
         $user->userAdvancedHelp;
+        $user->avatar = isset($user->getMedia('avatar')[0]) ? $user->getMedia('avatar')[0] : '';
         return response()->json([$user], 200);
     }
 
