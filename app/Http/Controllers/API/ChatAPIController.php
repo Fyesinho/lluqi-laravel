@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Mail\Mail;
 use App\Models\Chat;
 use App\Models\ChatUser;
 use App\Models\Message;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -64,6 +66,22 @@ class ChatAPIController extends Controller{
             'chat_id'   => $idChat,
             'user_id'   => $user->id
         ]);
+
+        if($user->role == User::ROLE_HOSTEL){
+            $travelers = $chat->users->where("role", User::ROLE_TRAVELER);
+            foreach ($travelers as $traveler){
+                $nameHostel = $user->name . " (Hostal" .$user->hostels->name_hostel . ")";
+                Mail::newMessage($traveler->name, $traveler->email, $traveler->name, $nameHostel,User::ROLE_TRAVELER);
+            }
+        }
+
+        if($user->role == User::ROLE_TRAVELER){
+            $hostels = $chat->users->where("role", User::ROLE_HOSTEL);
+            foreach ($hostels as $hostel){
+                $nameHostel = $hostel->name . " (Hostal " .$hostel->hostels->name_hostel . ")";
+                Mail::newMessage($nameHostel, $hostel->email, $user->name, $nameHostel, User::ROLE_HOSTEL);
+            }
+        }
 
         return response()->json(null, 200);
     }
