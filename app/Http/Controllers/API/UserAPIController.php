@@ -4,11 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\Auth\CreateUserAPIRequest;
 use App\Http\Requests\API\Auth\LoginAPIRequest;
+use App\Mail\Mail;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+
 
 class UserAPIController extends Controller{
     public function register(CreateUserAPIRequest $request){
@@ -23,6 +25,7 @@ class UserAPIController extends Controller{
         $data['role'] = User::ROLE_TRAVELER;
 
         $user = User::create($data);
+        Mail::newUser($user->name, $user->email);
         return response()->json([$user], 200);
     }
 
