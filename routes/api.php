@@ -19,7 +19,7 @@ Route::post('logout', 'UserAPIController@logout');
 
 
 Route::group(['middleware' => 'auth:api'], function(){
-    Route::patch('user', 'UserAPIController@update');
+    Route::post('user', 'UserAPIController@update');
     Route::get('user', 'UserAPIController@getInfo');
 
     Route::post('chat', 'ChatAPIController@createChat');
