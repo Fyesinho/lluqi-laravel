@@ -26,6 +26,10 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('chat', 'ChatAPIController@chats');
     Route::get('chat/{id}', 'ChatAPIController@messages');
     Route::post('chat/{id}/message', 'ChatAPIController@newMessage');
+
+    Route::get('plan', 'PlanAPIController@index');
+    Route::post('plan', 'PlanAPIController@store');
+    //Route::post('plan/{id}/', 'PlanAPIController@update');
 });
 
 Route::resource('pruebas', 'PruebaAPIController');

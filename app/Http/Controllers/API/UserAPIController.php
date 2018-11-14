@@ -109,6 +109,7 @@ class UserAPIController extends Controller{
         $user->gender;
         $user->userBasicHelp;
         $user->userAdvancedHelp;
+        $user->plan = $user->getPlan();
 
         unset($user->gender_id);
         unset($user->city_id);
