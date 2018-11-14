@@ -61,11 +61,11 @@ class ChatAPIController extends Controller{
             return response()->json(['message' => 'Chat not found'], 400);
         }
 
-        /*Message::create([
+        Message::create([
             'text'      => $message,
             'chat_id'   => $idChat,
             'user_id'   => $user->id
-        ]);*/
+        ]);
 
         if($user->role == User::ROLE_HOSTEL){
             $travelers = $chat->users->where("role", User::ROLE_TRAVELER);

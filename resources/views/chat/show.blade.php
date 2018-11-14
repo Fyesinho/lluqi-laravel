@@ -12,6 +12,13 @@
             </div>
         </div>
         <div class="text-center">
+            <p style="float: left;">Responder</p>
+            {!! Form::open(['route' => 'chat.store']) !!}
+            <input type="hidden" name="idChat" value="{{$idChat}}">
+            <textarea style="width: 100%" rows="2" name="message"></textarea>
+            {!! Form::submit('Responder', ['class' => 'btn btn-success']) !!}
+
+            {!! Form::close() !!}
 
         </div>
     </div>
