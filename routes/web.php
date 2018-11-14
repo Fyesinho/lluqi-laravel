@@ -47,5 +47,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('user', 'UserController');
 
     Route::resource('testimonial', 'TestimonialController');
+    Route::resource('plan', 'PlanController');
 
 });

@@ -8,6 +8,8 @@ use App\Models\Country;
 use App\Models\Gender;
 use App\Models\Hostel;
 use App\Models\NeedActivity;
+use App\Models\Plan;
+use App\Models\PlanUser;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -128,5 +130,13 @@ class User extends Authenticatable implements HasMedia
             default:
                 return '';
         }
+    }
+
+    public function getPlan(){
+        $planUser = PlanUser::where([['user_id',$this->id],['active',true]])->first();
+        if(isset($planUser) && $planUser){
+            return $plan = Plan::find($planUser->plan_id);
+        }
+        return [];
     }
 }
