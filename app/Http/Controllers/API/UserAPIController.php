@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\Auth\CreateUserAPIRequest;
 use App\Http\Requests\API\Auth\LoginAPIRequest;
 use App\Mail\Mail;
+use App\Models\Chat;
+use App\Models\ChatUser;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -25,7 +27,18 @@ class UserAPIController extends Controller{
         $data['role'] = User::ROLE_TRAVELER;
 
         $user = User::create($data);
-        Mail::newUser($user->name, $user->email);
+        //Mail::newUser($user->name, $user->email);
+
+        $chat = Chat::create();
+        ChatUser::create([
+            'user_id' => $user->id,
+            'chat_id' => $chat->id
+        ]);
+        ChatUser::create([
+            'user_id' => env('CHAT_USERID'),
+            'chat_id' => $chat->id
+        ]);
+
         return response()->json([$user], 200);
     }
 
