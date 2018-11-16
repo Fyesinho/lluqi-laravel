@@ -7,6 +7,7 @@ use App\Http\Requests\API\Auth\LoginAPIRequest;
 use App\Mail\Mail;
 use App\Models\Chat;
 use App\Models\ChatUser;
+use App\Models\Message;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -37,6 +38,12 @@ class UserAPIController extends Controller{
         ChatUser::create([
             'user_id' => env('CHAT_USERID'),
             'chat_id' => $chat->id
+        ]);
+
+        Message::create([
+            'text'      => env('CHAT_MESSAGE'),
+            'chat_id'   => $chat->id,
+            'user_id'   => env('CHAT_USERID')
         ]);
 
         return response()->json([$user], 200);
