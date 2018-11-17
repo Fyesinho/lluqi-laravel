@@ -11,7 +11,7 @@ use Response;
 class DestinationsAPIController extends Controller{
 
     public function index(){
-        $destinations = Destination::paginate(6);
+        $destinations = Destination::all();
         foreach ($destinations as $destination){
             $destination->city = City::find($destination->city_id)->load('media');
             unset($destination->city_id);
