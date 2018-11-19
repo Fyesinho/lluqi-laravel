@@ -20,8 +20,8 @@ class Mail{
             0
         );
 
-        $email->setTemplateId(env('SENDGRID_NEWUSER'));
-        $sendgrid = new SendGrid(getenv('SENDGRID_API_KEY'));
+        $email->setTemplateId('d-ba3155d284d6448c9be9b2bb34122537');
+        $sendgrid = new SendGrid("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");
 
         Log::info("[MAIL] new user ". $name . "(".$emailUser.")");
         try {
@@ -47,8 +47,8 @@ class Mail{
             0
         );
 
-        $email->setTemplateId(env('SENDGRID_NEWUSER'));
-        $sendgrid = new SendGrid(getenv('SENDGRID_API_KEY'));
+        $email->setTemplateId('d-ba3155d284d6448c9be9b2bb34122537');
+        $sendgrid = new SendGrid("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");
 
         Log::info("[MAIL] change password ". $name . "(".$emailUser.")");
         try {
@@ -75,9 +75,9 @@ class Mail{
             0
         );
 
-        $value = ($for == User::ROLE_TRAVELER) ? "SENDGRID_NEWMESSAGE_FORTRAVELER" : "SENDGRID_NEWMESSAGE_FORHOSTAL";
-        $emailSend->setTemplateId(env($value));
-        $sendgrid = new SendGrid(getenv('SENDGRID_API_KEY'));
+        $value = ($for == User::ROLE_TRAVELER) ? "d-0d38542b1610474fa96c57b616c71ff7" : "d-52559287326b4c398f92c00436068b0a";
+        $emailSend->setTemplateId($value);
+        $sendgrid = new SendGrid("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");
 
         $nameFrom = ($for == User::ROLE_TRAVELER) ? $hostalname : $username;
         Log::info("[MAIL] new message for ". $nameTo . " from " .$nameFrom);
