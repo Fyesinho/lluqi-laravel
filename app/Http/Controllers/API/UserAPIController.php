@@ -28,7 +28,7 @@ class UserAPIController extends Controller{
         $data['role'] = User::ROLE_TRAVELER;
 
         $user = User::create($data);
-        //Mail::newUser($user->name, $user->email);
+        Mail::newUser($user->name, $user->email);
 
         $chat = Chat::create();
         ChatUser::create([
@@ -36,14 +36,14 @@ class UserAPIController extends Controller{
             'chat_id' => $chat->id
         ]);
         ChatUser::create([
-            'user_id' => env('CHAT_USERID'),
+            'user_id' => "2",
             'chat_id' => $chat->id
         ]);
 
         Message::create([
-            'text'      => env('CHAT_MESSAGE'),
+            'text'      => "Hola! Bienvenido a lluqi.com... Yo seré tu compañero de viajes en todas tus aventuras... Si tienes dudas o consultas, estaré aquí para ayudarte.",
             'chat_id'   => $chat->id,
-            'user_id'   => env('CHAT_USERID')
+            'user_id'   => "2"
         ]);
 
         return response()->json([$user], 200);
