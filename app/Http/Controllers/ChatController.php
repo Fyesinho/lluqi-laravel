@@ -27,7 +27,7 @@ class ChatController extends Controller{
 
         $messages = $chat->messages->load('user');
         //return response()->json($messages, 200);
-        return view('chat.show', compact('messages', 'idChat'));
+        return view('chat.show', compact('chat', 'messages', 'idChat'));
     }
 
     public function store(){
