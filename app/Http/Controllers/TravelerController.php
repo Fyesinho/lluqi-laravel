@@ -80,10 +80,10 @@ class TravelerController extends Controller
         unset($input['advanced_help']);
         unset($input['avatar']);
 
-        if(empty($data['password'])){
-            unset($data['password']);
+        if(empty($input['password'])){
+            unset($input['password']);
         }else {
-            $data['password'] = bcrypt($data['password']);
+            $input['password'] = bcrypt($input['password']);
         }
 
         $traveler = User::create($input);
