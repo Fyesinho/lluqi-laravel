@@ -53,7 +53,7 @@ class User extends Authenticatable implements HasMedia
         'native_language', 'language_id', 'language_id', 'language2_id', 'language3_id', 'language4_id',
         'instagram', 'youtube',
         'basic_help', 'advance_help',
-        'about_me', 'experience',
+        'about_me', 'experience', 'your_video',
 
         'is_premium'
     ];
