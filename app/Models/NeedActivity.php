@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -43,6 +44,10 @@ class NeedActivity extends Model
     public static $rules = [
         
     ];
+
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
 
     
 }

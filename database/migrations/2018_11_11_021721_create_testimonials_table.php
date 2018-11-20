@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateGENDERSTable extends Migration
+class CreateTestimonialsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -13,11 +13,13 @@ class CreateGENDERSTable extends Migration
      */
     public function up()
     {
-        Schema::create('g_e_n_d_e_r_s', function (Blueprint $table) {
+        Schema::create('testimonials', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('gender');
+
+            $table->text('description');
+            $table->string('user');
+
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -28,6 +30,6 @@ class CreateGENDERSTable extends Migration
      */
     public function down()
     {
-        Schema::drop('g_e_n_d_e_r_s');
+        Schema::dropIfExists('testimonials');
     }
 }

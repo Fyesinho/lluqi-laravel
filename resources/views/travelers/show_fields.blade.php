@@ -82,6 +82,16 @@
     <p>{!! $traveler->language4_id !!}</p>
 </div>
 
+<div class="form-group">
+    {!! Form::label('facebook', 'facebook:') !!}
+    <p>{!! $traveler->facebook !!}</p>
+</div>
+
+<div class="form-group">
+    {!! Form::label('vimeo', 'vimeo:') !!}
+    <p>{!! $traveler->vimeo !!}</p>
+</div>
+
 <!-- Created At Field -->
 <div class="form-group">
     {!! Form::label('created_at', 'Created At:') !!}
@@ -94,3 +104,8 @@
     <p>{!! $traveler->updated_at !!}</p>
 </div>
 
+<!-- Birthday Field -->
+<div class="form-group">
+    {!! Form::label('payment_at', 'Fecha de pago:') !!}
+    <p>{!! $traveler->payment_at !!}</p>
+</div>

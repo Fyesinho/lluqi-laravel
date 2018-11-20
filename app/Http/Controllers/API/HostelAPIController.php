@@ -39,7 +39,7 @@ class HostelAPIController extends AppBaseController
         $this->hostelRepository->pushCriteria(new RequestCriteria($request));
         $this->hostelRepository->pushCriteria(new LimitOffsetCriteria($request));
 //        $hostels = $this->hostelRepository->all();
-        $hostels = Hostel::with('city')->paginate(100);
+        $hostels = Hostel::search()->with('city')->get();
         return $this->sendResponse($hostels->toArray(), 'Hostels retrieved successfully');
     }
 

@@ -23,8 +23,29 @@ class CreateTravelerRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
-        return Traveler::$rules;
+    public function rules(){
+        return [
+            'name'      => 'required',
+            'email'     => 'required|email|unique:users,email',
+            'gender_id' => 'required',
+            'birthday'  => 'required',
+            'phone'     => 'required',
+            'password'  => 'required',
+        ];
+    }
+
+    public function messages(){
+        return [
+            'name.required'     => 'Campo nombre es requerido',
+
+            'email.required'    => 'Campo email es requerido',
+            'email.email'       => 'El campo email no corresponde a un email valido',
+            'email.unique'      => 'Email ya existente',
+
+            'gender_id.required'=> 'Campo genero es requerido',
+            'birthday.required' => 'Campo fecha de nacimiento es requerido',
+            'phone.required'    => 'Campo telefono es requerido',
+            'password.required' => 'Campo password es requerido'
+        ];
     }
 }

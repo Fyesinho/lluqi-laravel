@@ -58,11 +58,15 @@ class CityController extends AppBaseController
     public function store(CreateCityRequest $request)
     {
         $input = $request->all();
+        $image = request()->file('image', '');
 
         $city = $this->cityRepository->create($input);
 
-        Flash::success('City saved successfully.');
+        if(isset($image) && $image!=''){
+            $city->addMedia($image)->toMediaCollection('destinations');
+        }
 
+        Flash::success('City saved successfully.');
         return redirect(route('cities.index'));
     }
 
@@ -96,6 +100,7 @@ class CityController extends AppBaseController
     public function edit($id)
     {
         $city = $this->cityRepository->findWithoutFail($id);
+        $cities = Country::pluck('name', 'id');
 
         if (empty($city)) {
             Flash::error('City not found');
@@ -103,7 +108,7 @@ class CityController extends AppBaseController
             return redirect(route('cities.index'));
         }
 
-        return view('cities.edit')->with('city', $city);
+        return view('cities.edit', compact('cities'))->with('city', $city);
     }
 
     /**
@@ -126,8 +131,15 @@ class CityController extends AppBaseController
 
         $city = $this->cityRepository->update($request->all(), $id);
 
-        Flash::success('City updated successfully.');
+        $image = request()->file('image', '');
+        if(isset($image) && $image!=''){
+            if($city->getMedia('destinations')->count()>0){
+                $city->clearMediaCollection('destinations');
+            }
+            $city->addMedia($image)->toMediaCollection('destinations');
+        }
 
+        Flash::success('City updated successfully.');
         return redirect(route('cities.index'));
     }
 

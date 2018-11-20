@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
 
 /**
  * Class City
@@ -13,9 +15,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string city
  * @property integer country_id
  */
-class City extends Model
+class City extends Model implements HasMedia
 {
-    use SoftDeletes;
+    use SoftDeletes, HasMediaTrait;
 
     public $table = 'cities';
     
@@ -25,7 +27,8 @@ class City extends Model
 
     public $fillable = [
         'city',
-        'country_id'
+        'country_id',
+        'description',
     ];
 
     /**

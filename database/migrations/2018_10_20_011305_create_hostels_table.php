@@ -15,6 +15,7 @@ class CreateHostelsTable extends Migration
     {
         Schema::create('hostels', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('avatar');
             $table->string('name_hostel');
             $table->string('name_host');
             $table->integer('city_id')->unsigned();
@@ -25,6 +26,7 @@ class CreateHostelsTable extends Migration
             $table->integer('travelers_reciebed');
             $table->integer('calification');
             $table->string('web');
+            $table->string('phone');
             $table->string('description');
             $table->timestamps();
             $table->softDeletes();

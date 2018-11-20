@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -27,10 +28,8 @@ class Hostel extends Model
     use SoftDeletes;
 
     public $table = 'hostels';
-    
 
     protected $dates = ['deleted_at'];
-
 
     public $fillable = [
         'avatar',
@@ -45,7 +44,8 @@ class Hostel extends Model
         'calification',
         'web',
         'phone',
-        'description'
+        'description',
+        'user_id'
     ];
 
     /**
@@ -96,5 +96,55 @@ class Hostel extends Model
     public function activities() {
         return $this->belongsToMany(NeedActivity::class, 'hostel_activities', 'hostel_id', 'activity_id');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopeSearch($query){
+        //Log::info(request()->all());
+
+        $s = request()->get('s');
+        $country = request()->get('country');
+        $city = request()->get('city');
+        $month = request()->get('month');
+        $offers = request()->get('offers');
+        $activities =  request()->get('activities');
+
+        if(isset($s) && $s){
+            $query->where('name_hostel', 'like', '%'.$s.'%');
+        }
+
+        if(isset($country) && $country){
+            $query->whereHas('city', function($query) use($country){
+                $query->whereIn("country_id",explode(',',$country));
+            });
+        }
+
+        if(isset($city) && $city){
+            $query->whereIn('city_id', explode(',', $city));
+        }
+
+        if(isset($month) && $month){
+            $query->whereHas('months', function ($query) use ($month) {
+                $query->whereIn('months.id', explode(",",$month));
+            });
+        }
+
+        if(isset($offers) && $offers){
+            $query->whereHas('offers', function ($query) use ($offers) {
+                $query->whereIn('offers.id', explode(",",$offers));
+            });
+        }
+
+        if(isset($activities) && $activities){
+            $query->whereHas('activities', function ($query) use ($activities) {
+                $query->whereIn('need_activities.id', explode(",",$activities));
+            });
+        }
+
+        return $query;
+    }
+
     
 }

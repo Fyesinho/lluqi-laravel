@@ -13,8 +13,11 @@
         "infyomlabs/swagger-generator": "dev-master",
         "jlapp/swaggervel": "dev-master",
         "laravel/framework": "5.4.*",
+        "laravel/passport": "~4.0",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.4.0"
+        "laravelcollective/html": "^5.4.0",
+        "sendgrid/sendgrid": "^7.2",
+        "spatie/laravel-medialibrary": "^5.0.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

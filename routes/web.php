@@ -18,40 +18,36 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::match(['get', 'post'], 'register', function(){
+    return redirect('/');
+});
 
-Route::resource('countries', 'CountryController');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', 'HomeController@index');
 
-Route::resource('pruebas', 'PruebaController');
+    Route::resource('countries', 'CountryController');
+    Route::resource('pruebas', 'PruebaController');
+    Route::resource('languages', 'LanguageController');
+    Route::resource('travelers', 'TravelerController');
+    Route::resource('cities', 'CityController');
+    Route::resource('needActivities', 'NeedActivityController');
+    Route::resource('offers', 'OfferController');
+    Route::resource('hostels', 'HostelController');
+    Route::resource('hostelActivities', 'HostelActivityController');
+    Route::resource('hostelOffers', 'HostelOfferController');
+    Route::resource('images', 'ImagesController');
+    Route::resource('months', 'MonthController');
+    Route::resource('hostelMonths', 'HostelMonthController');
+    Route::resource('genders', 'GenderController');
 
-Route::resource('languages', 'LanguageController');
+    Route::get('chat', 'ChatController@chats')->name('chats');
+    Route::post('chat', 'ChatController@store')->name('chat.store');
+    Route::get('chat/{id}', 'ChatController@chatById')->name('chatById');
 
-Route::resource('travelers', 'TravelerController');
+    Route::resource('destination', 'DestinationsController');
+    Route::resource('user', 'UserController');
 
-Route::resource('gENDERS', 'GENDERController');
+    Route::resource('testimonial', 'TestimonialController');
+    Route::resource('plan', 'PlanController');
 
-Route::resource('cities', 'CityController');
-
-Route::resource('needActivities', 'NeedActivityController');
-
-Route::resource('offers', 'OfferController');
-
-Route::resource('hostels', 'HostelController');
-
-Route::resource('hostels', 'HostelController');
-
-Route::resource('genders', 'GenderController');
-
-Route::resource('hostels', 'HostelController');
-
-Route::resource('hostelActivities', 'HostelActivityController');
-
-Route::resource('hostelOffers', 'HostelOfferController');
-
-Route::resource('images', 'ImagesController');
-
-Route::resource('months', 'MonthController');
-
-Route::resource('hostelMonths', 'HostelMonthController');
-
-Route::resource('genders', 'GenderController');
+});

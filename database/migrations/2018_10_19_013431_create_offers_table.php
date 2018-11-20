@@ -16,6 +16,7 @@ class CreateOffersTable extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->increments('id');
             $table->text('offer');
+            $table->text('avatar');
             $table->timestamps();
             $table->softDeletes();
         });
