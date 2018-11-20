@@ -46,7 +46,8 @@ class User extends Authenticatable implements HasMedia
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'description', 'password', 'gender_id', 'birthday', 'phone', 'role', 'country_id', 'city_id',
+        'name', 'email', 'description', 'password', 'gender_id', 'birthday', 'phone', 'role', 'country_id',
+        'city_id', 'city',
         'facebook', 'vimeo', 'payment_at',
 
         'native_language', 'language_id', 'language_id', 'language2_id', 'language3_id', 'language4_id',
@@ -79,9 +80,9 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsToMany(NeedActivity::class, 'user_advance_help', null, 'need_activities_id');
     }
 
-    public function city(){
+    /*public function city(){
         return $this->belongsTo(City::class);
-    }
+    }*/
 
     public function gender(){
         return $this->belongsTo(Gender::class);

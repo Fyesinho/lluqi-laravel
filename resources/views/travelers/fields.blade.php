@@ -64,7 +64,7 @@
 <!-- City Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('city', 'City:') !!}
-    {!! Form::select('city_id', $cities, null, ['class' => 'form-control']) !!}
+    {!! Form::text('city', null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group col-sm-12">
