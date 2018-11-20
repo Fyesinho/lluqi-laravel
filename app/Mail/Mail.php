@@ -10,7 +10,7 @@ class Mail{
 
     static public function newUser($name, $emailUser){
         $email = new SendGrid\Mail\Mail();
-        $email->setFrom("info@lluqi.com", "El equipo de lluqi.com");
+        $email->setFrom("Hola@lluqi.com", "El equipo de lluqi.com");
         $email->addTo(
             $emailUser,
             $name,
@@ -37,7 +37,7 @@ class Mail{
 
     static public function changePassword($name, $emailUser){
         $email = new SendGrid\Mail\Mail();
-        $email->setFrom("info@lluqi.com", "El equipo de lluqi.com");
+        $email->setFrom("Hola@lluqi.com", "El equipo de lluqi.com");
         $email->addTo(
             $emailUser,
             $name,
@@ -64,7 +64,7 @@ class Mail{
 
     static public function newMessage($nameTo, $emailTo, $username, $hostalname, $for){
         $emailSend = new SendGrid\Mail\Mail();
-        $emailSend->setFrom("info@lluqi.com", "El equipo de lluqi.com");
+        $emailSend->setFrom("Hola@lluqi.com", "El equipo de lluqi.com");
         $emailSend->addTo(
             $emailTo,
             $nameTo,
