@@ -24,6 +24,7 @@ Route::match(['get', 'post'], 'register', function(){
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index');
+    Route::get('travelers/export', 'TravelerController@exportToExcel')->name('travelers.export');
 
     Route::resource('countries', 'CountryController');
     Route::resource('pruebas', 'PruebaController');
