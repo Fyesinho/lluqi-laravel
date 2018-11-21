@@ -6,7 +6,7 @@
         <h1 class="pull-right">
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('travelers.create') !!}">Add New</a>
         </h1>
-        <h1 class="pull-right" style="margin-right: 10px !important;display: none;">
+        <h1 class="pull-right" style="margin-right: 10px !important;">
             <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('travelers.export') !!}">Exportar</a>
         </h1>
     </section>
