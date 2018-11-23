@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateNeedActivityRequest;
 use App\Http\Requests\UpdateNeedActivityRequest;
+use App\Models\NeedActivity;
 use App\Repositories\NeedActivityRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -43,7 +44,8 @@ class NeedActivityController extends AppBaseController
      */
     public function create()
     {
-        return view('need_activities.create');
+        $types = NeedActivity::getTypes();
+        return view('need_activities.create', compact('types'));
     }
 
     /**
@@ -94,6 +96,7 @@ class NeedActivityController extends AppBaseController
     public function edit($id)
     {
         $needActivity = $this->needActivityRepository->findWithoutFail($id);
+        $types = NeedActivity::getTypes();
 
         if (empty($needActivity)) {
             Flash::error('Need Activity not found');
@@ -101,7 +104,7 @@ class NeedActivityController extends AppBaseController
             return redirect(route('needActivities.index'));
         }
 
-        return view('need_activities.edit')->with('needActivity', $needActivity);
+        return view('need_activities.edit', compact('types'))->with('needActivity', $needActivity);
     }
 
     /**
