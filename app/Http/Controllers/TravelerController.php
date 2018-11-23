@@ -13,7 +13,7 @@ use App\Repositories\TravelerRepository;
 use App\User;
 use Illuminate\Http\Request;
 use Flash;
-use Prettus\Repository\Criteria\RequestCriteria;
+use Maatwebsite\Excel\Facades\Excel;
 use Response;
 
 class TravelerController extends Controller
@@ -230,5 +230,36 @@ class TravelerController extends Controller
         Flash::success('Traveler deleted successfully.');
 
         return redirect(route('travelers.index'));
+    }
+
+    public function exportToExcel(){
+        $traverlers = User::select('name', 'email', 'birthday', 'phone', 'country_id', 'city')
+            ->traveler()->get()
+            ->map(function ($traveler){
+                $traveler->nombre = $traveler->name;
+                $traveler->correo = $traveler->email;
+                $traveler->telefono = $traveler->phone;
+                $traveler->pais = isset($traveler->country) ? $traveler->country->name : '';
+                $traveler->ciudad = $traveler->city;
+                $traveler->fecha_nacimiento = $traveler->birthday;
+
+                unset($traveler->name);
+                unset($traveler->phone);
+                unset($traveler->email);
+                unset($traveler->birthday);
+                unset($traveler->country);
+                unset($traveler->country_id);
+                unset($traveler->city);
+                return $traveler;
+            })->toArray();
+
+        return Excel::create('Viajeros-' .time(), function($excel) use ($traverlers) {
+            $excel->sheet('Viajeros', function ($sheet) use ($traverlers) {
+                $sheet->fromArray(
+                    $traverlers
+                );
+
+            });
+        })->download('xlsx');
     }
 }

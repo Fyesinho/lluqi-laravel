@@ -27,6 +27,16 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+
+
+    'sendgrid_key' => env('SENDGRID_API_KEY', ''),
+    'sendgrid_newuser' => env('SENDGRID_NEWUSER', ''),
+    'sendgrid_newmessage_forhostal' => env('SENDGRID_NEWMESSAGE_FORHOSTAL', ''),
+    'sendgrid_newmessage_fortraveler' => env('SENDGRID_NEWMESSAGE_FORTRAVELER', ''),
+
+    'sendgrid_from' => env('SENDGRID_FROM',''),
+    'sendgrid_from_user' => env('SENDGRID_FROM_USER',''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
@@ -163,6 +173,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -235,6 +246,7 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Flash'     => Laracasts\Flash\Flash::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
