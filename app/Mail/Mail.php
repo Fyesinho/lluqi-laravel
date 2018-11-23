@@ -91,4 +91,29 @@ class Mail{
             Log::info('Caught exception: '.  $e->getMessage());
         }
     }
+
+    static public function newPlan($name, $emailUser){
+        $email = new SendGrid\Mail\Mail();
+        $email->setFrom(Config('app.sendgrid_from'), Config('app.sendgrid_from_user'));
+        $email->addTo(
+            $emailUser,
+            $name,
+            [],
+            0
+        );
+
+        $email->setTemplateId(Config('app.sendgrid_plan'));
+        $sendgrid = new SendGrid(Config('app.sendgrid_key'));
+
+        Log::info("[MAIL] Plan user ". $name . "(".$emailUser.")");
+        try {
+            $response = $sendgrid->send($email);
+            Log::info($response->statusCode());
+            //print $response->statusCode() . "\n";
+            //print_r($response->headers());
+            //print $response->body() . "\n";
+        } catch (Exception $e) {
+            Log::info('Caught exception: '.  $e->getMessage());
+        }
+    }
 }

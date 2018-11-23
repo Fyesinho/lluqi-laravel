@@ -27,12 +27,19 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
-
+    /*
+    |--------------------------------------------------------------------------
+    | Sendgrid email
+    |--------------------------------------------------------------------------
+    |
+    */
 
     'sendgrid_key' => env('SENDGRID_API_KEY', ''),
+
     'sendgrid_newuser' => env('SENDGRID_NEWUSER', ''),
     'sendgrid_newmessage_forhostal' => env('SENDGRID_NEWMESSAGE_FORHOSTAL', ''),
     'sendgrid_newmessage_fortraveler' => env('SENDGRID_NEWMESSAGE_FORTRAVELER', ''),
+    'sendgrid_plan' => env('SENDGRID_PLAN', ''),
 
     'sendgrid_from' => env('SENDGRID_FROM',''),
     'sendgrid_from_user' => env('SENDGRID_FROM_USER',''),

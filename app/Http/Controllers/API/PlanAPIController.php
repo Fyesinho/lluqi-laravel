@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreatePlanUserRequest;
+use App\Mail\Mail;
 use App\Models\Plan;
 use App\Models\PlanUser;
 use Carbon\Carbon;
@@ -49,6 +50,10 @@ class PlanAPIController extends Controller{
             'created_at'=> $date,
             'active'    => $active
         ]);
+
+        if($active){
+            Mail::newPlan($user->name, $user->email);
+        }
 
         return response()->json([$planUser], 201);
     }
