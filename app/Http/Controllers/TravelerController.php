@@ -44,7 +44,10 @@ class TravelerController extends Controller
         $languages = Language::pluck('title', 'id');
         $cities = City::pluck('city', 'id');
         $genders = Gender::pluck('name','id');
-        $activities = NeedActivity::pluck('activity', 'id');
+
+        $basic = NeedActivity::basic()->pluck('activity', 'id');
+        $advanced = NeedActivity::advanced()->pluck('activity', 'id');
+
         $roles = [
             User::ROLE_ADMIN    => User::ROLE_ADMIN_TEXT,
             User::ROLE_TRAVELER => User::ROLE_TRAVELER_TEXT,
@@ -58,7 +61,7 @@ class TravelerController extends Controller
             User::TRAVELER_TYPE_GOLD    => User::TRAVELER_TYPE_GOLD_TEXT,
         ];
 
-        return view('travelers.create', compact('countries', 'languages', 'cities', 'genders', 'activities', 'roles', 'is_premium'));
+        return view('travelers.create', compact('countries', 'languages', 'cities', 'genders', 'roles', 'is_premium', 'basic', 'advanced'));
     }
 
     /**
@@ -135,7 +138,9 @@ class TravelerController extends Controller
             return redirect(route('travelers.index'));
         }
 
-        $activities = NeedActivity::pluck('activity', 'id');
+        $basic = NeedActivity::basic()->pluck('activity', 'id');
+        $advanced = NeedActivity::advanced()->pluck('activity', 'id');
+
         $countries = Country::pluck('name', 'id');
         $languages = Language::pluck('title', 'id');
         $cities = City::pluck('city', 'id');
@@ -153,7 +158,7 @@ class TravelerController extends Controller
             User::TRAVELER_TYPE_GOLD    => User::TRAVELER_TYPE_GOLD_TEXT,
         ];
 
-        return view('travelers.edit', compact('traveler', 'countries', 'languages', 'cities', 'genders', 'activities', 'roles', 'is_premium'));
+        return view('travelers.edit', compact('traveler', 'countries', 'languages', 'cities', 'genders', 'roles', 'is_premium', 'basic', 'advanced'));
     }
 
     /**

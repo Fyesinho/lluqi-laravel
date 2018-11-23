@@ -38,7 +38,14 @@ class NeedActivityAPIController extends AppBaseController
     {
         $this->needActivityRepository->pushCriteria(new RequestCriteria($request));
         $this->needActivityRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $needActivities = $this->needActivityRepository->all();
+
+        $filter = request()->get('type');
+        if(isset($filter) && $filter!=""){
+            $needActivities = NeedActivity::whereType($filter)->get();
+        }
+        else{
+            $needActivities = $this->needActivityRepository->all();
+        }
 
         return $this->sendResponse($needActivities->toArray(), 'Need Activities retrieved successfully');
     }

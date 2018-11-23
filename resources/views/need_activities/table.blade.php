@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>Activity</th>
+            <th>Tipo</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -9,6 +10,7 @@
     @foreach($needActivities as $needActivity)
         <tr>
             <td>{!! $needActivity->activity !!}</td>
+            <td>{!! $needActivity->getType() !!}</td>
             <td>
                 {!! Form::open(['route' => ['needActivities.destroy', $needActivity->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

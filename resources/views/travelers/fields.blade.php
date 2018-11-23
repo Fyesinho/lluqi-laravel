@@ -120,12 +120,12 @@
 
 <div class="form-group col-md-6">
     {!! Form::label('basic_help', 'basic help:') !!}
-    {!! Form::select('basic_help', $activities, isset($traveler) ? $traveler->userBasicHelp : [], ['class' => 'form-control', 'multiple'=>'multiple', 'name' => "basic_help[]"]); !!}
+    {!! Form::select('basic_help', $basic, isset($traveler) ? $traveler->userBasicHelp : [], ['class' => 'form-control', 'multiple'=>'multiple', 'name' => "basic_help[]"]); !!}
 </div>
 
 <div class="form-group col-md-6">
     {!! Form::label('advanced_help', 'advanced help:') !!}
-    {!! Form::select('advanced_help', $activities, isset($traveler) ? $traveler->userAdvancedHelp : [], ['class' => 'form-control', 'multiple'=>'multiple', 'name' => "advanced_help[]"]); !!}
+    {!! Form::select('advanced_help', $advanced, isset($traveler) ? $traveler->userAdvancedHelp : [], ['class' => 'form-control', 'multiple'=>'multiple', 'name' => "advanced_help[]"]); !!}
 </div>
 
 <div class="form-group col-sm-12">
