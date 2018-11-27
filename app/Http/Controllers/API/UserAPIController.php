@@ -94,13 +94,13 @@ class UserAPIController extends Controller{
         }
 
         $basic = isset($data['basic_help']) ? explode(",",$data['basic_help']) : [];
-        if(isset($data['basic_help']) && count($basic)>0){
+        if(isset($data['basic_help'])){
             $user->userBasicHelp()->sync($basic);
             unset($data['basic_help']);
         }
 
         $advanced = isset($data['advanced_help']) ? explode(",",$data['advanced_help']) : [];
-        if(isset($data['advanced_help']) && count($advanced)>0){
+        if(isset($data['advanced_help'])){
             $user->userAdvancedHelp()->sync($advanced);
             unset($data['advanced_help']);
         }
