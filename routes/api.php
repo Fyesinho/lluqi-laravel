@@ -50,3 +50,5 @@ Route::resource('genders', 'GenderAPIController');
 Route::get('destinations', 'DestinationsAPIController@index');
 Route::get('testimonials', 'TestimonialAPIController@index');
 
+Route::post('postulation', 'PostulationAPIController@store');
+
