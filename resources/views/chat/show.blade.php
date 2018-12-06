@@ -11,7 +11,7 @@
                 @include('chat.messages')
             </div>
         </div>
-        @if(in_array(env('CHAT_USERID'),$chat->users->pluck('id')->toArray()))
+        @if(in_array(Config('app.user_support'),$chat->users->pluck('id')->toArray()))
             <div class="text-center">
                 <p style="float: left;">Responder</p>
                 {!! Form::open(['route' => 'chat.store']) !!}
@@ -26,7 +26,7 @@
             <div class="text-center" style="border: 1px solid red ; padding: 30px 0;">
                 <p style="font-weight: bold;font-size: 15px; margin: 0">Chat equivocado</p>
                 <p style="font-weight: bold;font-size: 13px; margin: 0">No puedes escribir mensajes</p>
-            </div
+            </div>
         @endif
     </div>
 @endsection

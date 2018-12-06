@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use League\Flysystem\Config;
 
 
 class UserAPIController extends Controller{
@@ -36,14 +37,14 @@ class UserAPIController extends Controller{
             'chat_id' => $chat->id
         ]);
         ChatUser::create([
-            'user_id' => "2",
+            'user_id' => Config('app.user_support'),
             'chat_id' => $chat->id
         ]);
 
         Message::create([
-            'text'      => "Hola! Bienvenido a lluqi.com... Yo seré tu compañero de viajes en todas tus aventuras... Si tienes dudas o consultas, estaré aquí para ayudarte.",
+            'text'      => Config('app.message_support'),
             'chat_id'   => $chat->id,
-            'user_id'   => "2"
+            'user_id'   => Config('app.user_support')
         ]);
 
         return response()->json([$user], 200);

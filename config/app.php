@@ -27,6 +27,9 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'user_support' => env('APP_USER_SUPPORT', '2'),
+    'message_support' => env('APP_MESSAGE_SUPPORT', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Sendgrid email
