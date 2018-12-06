@@ -39,7 +39,7 @@ class ChatController extends Controller{
         Message::create([
             'text'      => $message,
             'chat_id'   => $chat->id,
-            'user_id'   => env('CHAT_USERID')
+            'user_id'   => Config('app.user_support')
         ]);
         return back();
     }
