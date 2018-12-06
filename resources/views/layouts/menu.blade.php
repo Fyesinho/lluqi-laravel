@@ -35,6 +35,10 @@
     <a href="{!! route('testimonial.index') !!}"><i class="fa fa-comment"></i><span>Testimonios</span></a>
 </li>
 
+<li class="{{ Request::is('postulation*') ? 'active' : '' }}">
+    <a href="{!! route('postulation') !!}"><i class="fa fa-user"></i><span>Embajadores</span></a>
+</li>
+
 <li>
     <a href="#" style="margin-bottom: -10px"><i class="fa fa-cogs"></i><span>Parámetros generales</span></a>
     <ul class="menu-ul">

@@ -52,3 +52,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('plan', 'PlanController');
 
 });
+
+Route::get('postulation', 'PostulationController@index')->name('postulation');
