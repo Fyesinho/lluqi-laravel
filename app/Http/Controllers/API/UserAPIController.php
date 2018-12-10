@@ -21,7 +21,7 @@ class UserAPIController extends Controller{
         $data = [
             'name'      => request()->get('name'),
             'email'     => request()->get('email'),
-            'gender_id'    => request()->get('gender'),
+            'gender_id'    => request()->get('gender_id'),
             'birthday'  => request()->get('birthday'),
             'phone'     => request()->get('phone'),
             'password'  => bcrypt(request()->get('password')),
