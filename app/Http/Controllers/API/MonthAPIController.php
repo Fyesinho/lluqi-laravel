@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateMonthAPIRequest;
 use App\Http\Requests\API\UpdateMonthAPIRequest;
+use App\Models\Hostel;
 use App\Models\Month;
 use App\Repositories\MonthRepository;
 use Illuminate\Http\Request;
@@ -38,7 +39,15 @@ class MonthAPIController extends AppBaseController
     {
         $this->monthRepository->pushCriteria(new RequestCriteria($request));
         $this->monthRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $months = $this->monthRepository->all();
+
+        $months = $this->monthRepository->all()->map(function ($month, $key){
+            $id = $month->id;
+            $length = Hostel::whereHas('months', function ($query) use ($id) {
+                $query->where('months.id', $id);
+            })->count();
+            $month->length = $length;
+            return $month;
+        });
 
         return $this->sendResponse($months->toArray(), 'Months retrieved successfully');
     }

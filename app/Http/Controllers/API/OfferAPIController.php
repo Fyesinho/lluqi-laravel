@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateOfferAPIRequest;
 use App\Http\Requests\API\UpdateOfferAPIRequest;
+use App\Models\Hostel;
 use App\Models\Offer;
 use App\Repositories\OfferRepository;
 use Illuminate\Http\Request;
@@ -37,8 +38,16 @@ class OfferAPIController extends AppBaseController
     public function index(Request $request)
     {
         $this->offerRepository->pushCriteria(new RequestCriteria($request));
-        $this->offerRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $offers = $this->offerRepository->all();
+        $this->offerRepository->pushCriteria(new LimitOffsetCriteria($request));;
+
+        $offers = $this->offerRepository->all()->map(function ($offer, $key){
+            $id = $offer->id;
+            $length = Hostel::whereHas('offers', function ($query) use ($id) {
+                $query->where('offers.id', $id);
+            })->count();
+            $offer->length = $length;
+            return $offer;
+        });
 
         return $this->sendResponse($offers->toArray(), 'Offers retrieved successfully');
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateNeedActivityAPIRequest;
 use App\Http\Requests\API\UpdateNeedActivityAPIRequest;
+use App\Models\Hostel;
 use App\Models\NeedActivity;
 use App\Repositories\NeedActivityRepository;
 use Illuminate\Http\Request;
@@ -46,6 +47,15 @@ class NeedActivityAPIController extends AppBaseController
         else{
             $needActivities = $this->needActivityRepository->all();
         }
+
+        $needActivities = $needActivities->map(function ($needActivity, $key){
+            $id = $needActivity->id;
+            $length = Hostel::whereHas('activities', function ($query) use ($id) {
+                $query->where('need_activities.id', $id);
+            })->count();
+            $needActivity->length = $length;
+            return $needActivity;
+        });
 
         return $this->sendResponse($needActivities->toArray(), 'Need Activities retrieved successfully');
     }

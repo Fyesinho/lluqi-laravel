@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateLanguageAPIRequest;
 use App\Http\Requests\API\UpdateCountryAPIRequest;
 use App\Http\Requests\API\UpdateLanguageAPIRequest;
+use App\Models\Hostel;
 use App\Models\Language;
 use App\Repositories\CountryRepository;
 use App\Repositories\LanguageRepository;
@@ -40,7 +41,15 @@ class CountryAPIController extends AppBaseController
     {
         $this->countryRepository->pushCriteria(new RequestCriteria($request));
         $this->countryRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $countries = $this->countryRepository->all();
+
+        $countries = $this->countryRepository->all()->map(function ($country, $key){
+            $id = $country->id;
+            $length = Hostel::whereHas('city', function($query) use($id){
+                $query->where("country_id",$id);
+            })->count();
+            $country->length = $length;
+            return $country;
+        });
 
         return $this->sendResponse($countries->toArray(), 'Countries retrieved successfully');
     }
