@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateCityAPIRequest;
 use App\Http\Requests\API\UpdateCityAPIRequest;
 use App\Models\City;
+use App\Models\Hostel;
 use App\Repositories\CityRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -38,7 +39,12 @@ class CityAPIController extends AppBaseController
     {
         $this->cityRepository->pushCriteria(new RequestCriteria($request));
         $this->cityRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $cities = $this->cityRepository->all();
+
+        $cities = $this->cityRepository->all()->map(function ($city, $key){
+            $length = Hostel::where('city_id',$city->id)->count();
+            $city->length = $length;
+            return $city;
+        });
 
         return $this->sendResponse($cities->toArray(), 'Cities retrieved successfully');
     }
