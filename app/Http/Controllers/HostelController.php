@@ -32,10 +32,8 @@ class HostelController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->hostelRepository->pushCriteria(new RequestCriteria($request));
-        $hostels = $this->hostelRepository->all();
-        return view('hostels.index')
-            ->with('hostels', $hostels);
+        $hostels = (request()->has('s') && request()->get('s')!= "") ? Hostel::search()->get() : Hostel::all();
+        return view('hostels.index')->with('hostels', $hostels);
     }
 
     /**
